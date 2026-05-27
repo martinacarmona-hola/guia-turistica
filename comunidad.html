@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comunidad — Mititilla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        .com-hero {
+            width: 100%;
+            height: 380px;
+            background: #111;
+            overflow: hidden;
+        }
+
+        .com-hero img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+
+        .com-page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 52px 40px 100px;
+        }
+
+        .com-eyebrow {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #000; margin: 0 0 52px;
+        }
+
+        .com-eyebrow span { color: var(--red); }
+
+        .com-post {
+            margin-bottom: 80px;
+            padding-bottom: 0;
+        }
+
+        .com-post--photo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .com-post-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            background: #d0d0d0;
+            border-radius: 10px;
+        }
+
+        .com-post-img-placeholder {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #111;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .com-post--text .com-post-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 28px;
+        }
+
+        .com-post-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .com-post-avatar {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: #d0d0d0;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .com-post-avatar img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+
+        .com-post-meta-top { display: flex; flex-direction: column; gap: 3px; }
+
+        .com-post-name {
+            font-size: 36px; font-weight: 800;
+            letter-spacing: -.01em; line-height: 1;
+            text-transform: uppercase; color: #000;
+            margin: 0;
+        }
+
+        .com-post-date {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #888; margin: 0;
+        }
+
+        .com-post-content { display: flex; flex-direction: column; gap: 20px; }
+
+        .com-post-quote {
+            font-size: 15px; font-weight: 400;
+            line-height: 1.65; color: #111;
+            margin: 0;
+        }
+
+        .com-post-footer {
+            border-top: 1px solid #d0d0d0;
+            padding-top: 14px;
+            margin-top: 4px;
+        }
+
+        .com-post-location {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #000; margin: 0 0 4px;
+        }
+
+        .com-post-points {
+            font-size: 10px; font-weight: 500;
+            letter-spacing: .06em; text-transform: uppercase;
+            color: var(--red); margin: 0;
+        }
+
+        .com-divider {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 0 0 80px;
+        }
+
+        @media (max-width: 768px) {
+            .com-post--photo { grid-template-columns: 1fr; gap: 32px; }
+            .com-post--text .com-post-body { grid-template-columns: 1fr; gap: 20px; }
+            .com-post-name { font-size: 28px; }
+            .com-page { padding: 32px 20px 60px; }
+        }
+
+        .site-footer--shop {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 40px; border-top: 1px solid var(--border);
+        }
+        .footer-nav--shop { justify-content: flex-start; gap: 32px; }
+        .footer-logo-img { height: 44px; object-fit: contain; display: block; }
+
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div data-mit-toggle-here></div>
+    <div class="logo-wrap">
+        <img src="logotipo-08.jpg" alt="Mititilla" class="logo" />
+    </div>
+    <nav class="header-icons" aria-label="Accesos rápidos">
+        <button class="icon-btn" data-target="search" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        </button>
+        <button class="icon-btn" data-target="cart" aria-label="Cesta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
+        </button>
+        <button class="icon-btn" data-target="profile" aria-label="Perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
+        </button>
+        <button class="icon-btn" data-target="community" aria-label="Comunidad">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
+        </button>
+    </nav>
+</header>
+
+<main>
+
+    <div class="com-hero">
+        <img src="IMG_0807 copia.jpg" alt="Comunidad">
+    </div>
+
+    <div class="com-page">
+
+        <p class="com-eyebrow">PERFIL <span>•</span> COMUNIDAD MITITILLA</p>
+
+        <!-- ══ POST 1: PALOMA DÍAZ ══ -->
+        <article class="com-post com-post--photo">
+
+            <img src="a78c871f-0ad8-4177-955a-4c0bab0f63d9 copia.jpg" alt="Foto de Paloma" class="com-post-img">
+
+            <div class="com-post-content">
+                <div class="com-post-header">
+                    <div class="com-post-avatar">
+                        <img src="perfil paloma.PNG" alt="Paloma Díaz">
+                    </div>
+                    <div class="com-post-meta-top">
+                        <p class="com-post-name">PALOMA DÍAZ</p>
+                        <p class="com-post-date">EXPERIENCIA PALOMA D. • 18 MAY.</p>
+                    </div>
+                </div>
+
+                <p class="com-post-quote">"El sitio más honesto de todo el Albaicín. Pedimos casi todo el menú y cada plato llegó exactamente como te lo imaginabas después de leer la carta."</p>
+
+                <div class="com-post-footer">
+                    <p class="com-post-location">DE TAPAS POR GRANADA • CENTRO</p>
+                    <p class="com-post-points">+10 ptos. • Foto con copy</p>
+                </div>
+            </div>
+
+        </article>
+
+        <hr class="com-divider">
+
+        <!-- ══ POST 2: LAURA CUADRADO ══ -->
+        <article class="com-post com-post--text">
+
+            <div class="com-post-header">
+                <div class="com-post-avatar">
+                    <img src="perfil laura.PNG" alt="Laura Cuadrado">
+                </div>
+                <div class="com-post-meta-top">
+                    <p class="com-post-name">LAURA CUADRADO</p>
+                    <p class="com-post-date">EXPERIENCIA LAURA C. • 18 MAY.</p>
+                </div>
+            </div>
+
+            <div class="com-post-body">
+                <p class="com-post-quote">"Llegamos sin reserva y nos sentaron en diez minutos. La carta es pequeña pero perfecta, con productos del mercado de ese día. El arroz de era otro nivel."</p>
+                <p class="com-post-quote">"Llegamos sin reserva y nos sentaron en diez minutos. La carta es pequeña pero perfecta, con productos del mercado de ese día. El arroz de era otro nivel."</p>
+            </div>
+
+            <div class="com-post-footer" style="margin-top: 24px;">
+                <p class="com-post-location">DE TAPAS POR GRANADA • CENTRO</p>
+                <p class="com-post-points">+15 ptos. • Experiencia detallada</p>
+            </div>
+
+        </article>
+
+        <hr class="com-divider">
+
+        <!-- ══ POST 3: LUCÍA HERNÁNDEZ ══ -->
+        <article class="com-post com-post--photo">
+
+            <img src="1a8888ca-21da-4ee8-8f18-60e20ea4cfdf copia.JPG" alt="Foto de Lucía" class="com-post-img">
+
+            <div class="com-post-content">
+                <div class="com-post-header">
+                    <div class="com-post-avatar">
+                        <img src="perfil lucia.PNG" alt="Lucía Hernández">
+                    </div>
+                    <div class="com-post-meta-top">
+                        <p class="com-post-name">LUCÍA HERNÁNDEZ</p>
+                        <p class="com-post-date">EXPERIENCIA LUCÍA H. • 18 MAY.</p>
+                    </div>
+                </div>
+
+                <p class="com-post-quote">"Llegamos sin reserva y nos sentaron en diez minutos. La carta es pequeña pero perfecta, con productos del mercado de ese día. El arroz de era otro nivel."</p>
+
+                <div class="com-post-footer">
+                    <p class="com-post-location">DE TAPAS POR GRANADA • CENTRO</p>
+                    <p class="com-post-points">+10 ptos. • Foto con copy</p>
+                </div>
+            </div>
+
+        </article>
+
+    </div>
+
+</main>
+
+<footer class="site-footer site-footer--shop">
+    <nav class="footer-nav footer-nav--shop">
+        <a href="legal.html">AVISO LEGAL</a>
+        <a href="legal.html#privacidad">PRIVACIDAD</a>
+        <a href="legal.html#cookies">COOKIES</a>
+    </nav>
+    <img src="logotipo-08.jpg" alt="Mititilla" class="footer-logo-img">
+</footer>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+
+</body>
+</html>

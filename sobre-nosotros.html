@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sobre Mititilla — Guía Gastronómica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        /* ══════════════════════════
+           SOBRE NOSOTROS
+        ══════════════════════════ */
+
+        /* ── Hero ── */
+        .sn-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sn-hero-left {
+            padding: 64px 60px 64px 40px;
+            border-right: 1px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .sn-eyebrow {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #000; margin: 0;
+        }
+
+        .sn-eyebrow span { color: var(--red); }
+
+        .sn-title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .sn-title-sobre {
+            font-size: 96px; font-weight: 300;
+            line-height: .95; letter-spacing: -.03em;
+            text-transform: lowercase; color: #000;
+            display: block;
+            margin-top: 10px;
+
+        }
+
+        .sn-title-img {
+            width: 100%;
+            max-width: 440px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .sn-subtitle {
+            font-size: 13px; font-weight: 400;
+            letter-spacing: .22em; text-transform: uppercase;
+            color: #000; margin: 12px 0 0;
+        }
+
+        .sn-hero-right {
+            background: #111;
+            min-height: 480px;
+            overflow: hidden;
+        }
+
+        .sn-hero-right img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+
+        /* ── Contenido ── */
+        .sn-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sn-content-left {
+            padding: 60px 60px 60px 40px;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .sn-content-right {
+            padding: 60px 40px 60px 60px;
+        }
+
+        .sn-section-title {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #000; margin: 0 0 32px;
+        }
+
+        .sn-section-title span { color: var(--red); }
+
+        .sn-body p {
+            font-size: 14px; font-weight: 400;
+            line-height: 1.75; color: #111;
+            margin: 0 0 16px;
+        }
+
+        .sn-body p:last-child { margin-bottom: 0; }
+
+        /* ── Stats ── */
+        .sn-stat {
+            padding: 28px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sn-stat:first-child { padding-top: 0; }
+        .sn-stat:last-child { border-bottom: none; }
+
+        .sn-stat-num {
+            font-size: 64px; font-weight: 800;
+            line-height: 1; letter-spacing: -.02em;
+            color: var(--red); margin: 0 0 8px;
+        }
+
+        .sn-stat-label {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #000; margin: 0;
+        }
+
+        /* ── Footer ── */
+        .site-footer--shop {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 40px; border-top: 1px solid var(--border);
+        }
+        .footer-nav--shop { justify-content: flex-start; gap: 32px; }
+        .footer-logo-img { height: 44px; object-fit: contain; display: block; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .sn-hero { grid-template-columns: 1fr; }
+            .sn-hero-right { min-height: 260px; }
+            .sn-hero-left { padding: 40px 20px; border-right: none; }
+            .sn-title-sobre { font-size: 64px; }
+            .sn-content { grid-template-columns: 1fr; }
+            .sn-content-left { padding: 40px 20px; border-right: none; }
+            .sn-content-right { padding: 40px 20px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div data-mit-toggle-here></div>
+    <div class="logo-wrap">
+        <img src="logotipo-08.jpg" alt="Mititilla" class="logo" />
+    </div>
+    <nav class="header-icons" aria-label="Accesos rápidos">
+        <button class="icon-btn" data-target="search" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        </button>
+        <button class="icon-btn" data-target="cart" aria-label="Cesta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
+        </button>
+        <button class="icon-btn" data-target="profile" aria-label="Perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
+        </button>
+        <button class="icon-btn" data-target="community" aria-label="Comunidad">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
+        </button>
+    </nav>
+</header>
+
+<main>
+
+    <!-- ── Hero ── -->
+    <section class="sn-hero">
+
+        <div class="sn-hero-left">
+            <p class="sn-eyebrow">SOBRE <span>•</span> MITITILLA</p>
+            <div class="sn-title-block">
+                <span class="sn-title-sobre">sobre</span>
+                <!-- Sustituye este src por el nombre de tu imagen con "mititilla" -->
+                <img src="logo negro.jpg" alt="mititilla" class="sn-title-img">
+            </div>
+        </div>
+
+        <div class="sn-hero-right">
+            <img src="IMG_0774-2 copia.jpg" alt="Sobre Mititilla">
+        </div>
+
+    </section>
+
+    <!-- ── Contenido ── -->
+    <section class="sn-content">
+
+        <div class="sn-content-left">
+            <p class="sn-section-title">EL PROYECTO <span>•</span> MITITILLA</p>
+            <div class="sn-body">
+                <p>Mititilla nació de la necesidad de tener Granada en las manos, no en una pantalla.</p><br>
+                <p>Esta es una guía gastronómica física y desplegable que localiza los mejores sitios<br>
+                    de Granada según siete categorías: café, tapas, copas, restaurantes y mucho más.</p><br>
+                <p>No es un algoritmo el que elige, ni un listado de patrocinados. Es una selección<br> honesta,
+                    hecha a pie de calle, basada en calidad real y en el criterio de alguien que<br> conoce
+                    esta ciudad.</p><br>
+                <p>El formato físico no es una casualidad. Hay algo en tener un mapa entre las manos,<br> doblarlo,
+                    marcarlo, llevarlo en el bolsillo, que ninguna app ha conseguido reemplazar.<br> Granada merece
+                    ser descubierta así: despacio, con criterio, sin batería.</p><br>
+                <p>La guía cubre el centro de Granada con un top 3 dentro de cada categoría — <br>los locales escogidos
+                    por mayor calidad y experiencia en el sector gastronómico —<br> y se actualiza con cada edición para
+                    que siempre sea una referencia vigente.</p>
+            </div>
+        </div>
+
+        <div class="sn-content-right">
+            <div class="sn-stat">
+                <p class="sn-stat-num">24</p>
+                <p class="sn-stat-label">LOCALES SELECCIONADOS EN 7 CATEGORÍAS</p>
+            </div>
+            <div class="sn-stat">
+                <p class="sn-stat-num">01</p>
+                <p class="sn-stat-label">FORMATO FÍSICO DESPLEGABLE</p>
+            </div>
+            <div class="sn-stat">
+                <p class="sn-stat-num">100</p>
+                <p class="sn-stat-label">PUNTOS PARA RECIBIR TU REGALO FÍSICO</p>
+            </div>
+            <div class="sn-stat">
+                <p class="sn-stat-num">GRX</p>
+                <p class="sn-stat-label">GRANADA — ZONA CUBIERTA POR LA GUÍA</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ── Franja de iconos verdes ── -->
+    <div class="icon-row">
+        <img src="web mititilla-16.jpg" class="ICON" />
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer site-footer--shop">
+    <nav class="footer-nav footer-nav--shop">
+        <a href="legal.html">AVISO LEGAL</a>
+        <a href="legal.html#privacidad">PRIVACIDAD</a>
+        <a href="legal.html#cookies">COOKIES</a>
+    </nav>
+    <img src="logotipo-08.jpg" alt="Mititilla" class="footer-logo-img">
+</footer>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+
+</body>
+</html>

@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
             const target = btn.dataset.target;
             if (target === 'search')  { if (window.mitOpenSearch) window.mitOpenSearch(); return; }
-            if (target === 'profile') { window.location.href = 'perfil.html'; return; }
-            if (target === 'cart')    { showToast('Cesta — próximamente'); return; }
+            if (target === 'profile')    { window.location.href = 'perfil.html'; return; }
+            if (target === 'community')  { window.location.href = 'comunidad.html'; return; }
+            if (target === 'about')      { window.location.href = 'sobre-nosotros.html'; return; }
+            if (target === 'cart')       { showToast('Cesta — próximamente'); return; }
             const el = document.getElementById(target);
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'start' });

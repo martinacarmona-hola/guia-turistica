@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Legal — Mititilla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        /* ══════════════════════════
+           LEGAL
+        ══════════════════════════ */
+
+        .leg-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ── Tabs ── */
+        .leg-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 40px 40px 0;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .leg-tab-btn {
+            padding: 12px 28px;
+            border: 1px solid #000;
+            border-radius: 4px;
+            background: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 500;
+            letter-spacing: .1em; text-transform: uppercase;
+            cursor: pointer; color: #000;
+            transition: background .15s;
+        }
+
+        .leg-tab-btn.active {
+            font-weight: 800;
+            border-width: 2px;
+        }
+
+        .leg-tab-line {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin: 20px 0 0;
+        }
+
+        /* ── Contenido de cada tab ── */
+        .leg-tab-content { display: none; }
+        .leg-tab-content.active { display: block; }
+
+        .leg-page {
+            padding: 48px 0 100px;
+        }
+
+        .leg-eyebrow {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #000; margin: 0 0 12px;
+        }
+
+        .leg-eyebrow span { color: var(--red); }
+
+        .leg-title {
+            font-size: 72px; font-weight: 800;
+            line-height: 1; letter-spacing: -.02em;
+            text-transform: lowercase; color: #000;
+            margin: 0 0 40px;
+        }
+
+        .leg-divider {
+            border: none;
+            border-top: 1px solid #000;
+            margin: 0 0 52px;
+        }
+
+        /* ── Secciones ── */
+        .leg-section { margin-bottom: 48px; }
+
+        .leg-section-title {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #000; margin: 0 0 20px;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .leg-section-title::before {
+            content: '•';
+            color: var(--red);
+            font-size: 16px;
+        }
+
+        .leg-section p {
+            font-size: 14px; font-weight: 400;
+            line-height: 1.75; color: #111;
+            margin: 0 0 14px;
+            max-width: 720px;
+        }
+
+        .leg-section p:last-child { margin-bottom: 0; }
+
+        .leg-intro {
+            font-size: 14px; font-weight: 400;
+            line-height: 1.75; color: #111;
+            max-width: 720px;
+            margin: 0 0 48px;
+        }
+
+        /* ── Grid de derechos ── */
+        .leg-rights-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 720px;
+            margin: 0 0 32px;
+        }
+
+        .leg-right-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 20px 24px;
+        }
+
+        .leg-right-icon {
+            color: var(--red);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .leg-right-name {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #000; margin: 0 0 4px;
+        }
+
+        .leg-right-desc {
+            font-size: 12px; font-weight: 400;
+            color: #666; margin: 0;
+        }
+
+        /* ── Tabla cookies ── */
+        .leg-table {
+            width: 100%; max-width: 860px;
+            border-collapse: collapse;
+            margin: 0 0 32px;
+            font-size: 13px;
+        }
+
+        .leg-table th {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #000; text-align: left;
+            padding: 14px 16px;
+            border: 1px solid #e0e0e0;
+            background: #f9f9f9;
+        }
+
+        .leg-table td {
+            padding: 14px 16px;
+            border: 1px solid #e0e0e0;
+            font-size: 13px; font-weight: 400;
+            color: #111; vertical-align: top;
+            line-height: 1.6;
+        }
+
+        /* ── Caja de aviso ── */
+        .leg-info-box {
+            display: flex; align-items: flex-start; gap: 12px;
+            background: #f7f4f0;
+            border-left: 3px solid var(--red);
+            padding: 16px 20px;
+            border-radius: 0 4px 4px 0;
+            max-width: 720px;
+            margin: 0 0 32px;
+            font-size: 13px; font-weight: 400;
+            line-height: 1.6; color: #333;
+        }
+
+        .leg-info-box svg { flex-shrink: 0; color: var(--red); margin-top: 1px; }
+
+        /* ── Footer legal ── */
+        .leg-footer {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 40px;
+            border-top: 1px solid var(--border);
+            max-width: 100%;
+        }
+
+        .leg-footer-nav { display: flex; gap: 32px; }
+
+        .leg-footer-nav button {
+            background: none; border: none; cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #aaa;
+            padding: 0;
+        }
+
+        .leg-footer-nav button.active { color: var(--red); }
+        .leg-footer-nav button:hover { color: #000; }
+
+        .leg-footer-logo { height: 44px; object-fit: contain; display: block; }
+
+        @media (max-width: 768px) {
+            .leg-tabs { padding: 24px 20px 0; flex-wrap: wrap; }
+            .leg-wrap { padding: 0 20px; }
+            .leg-title { font-size: 48px; }
+            .leg-rights-grid { grid-template-columns: 1fr; }
+            .leg-table { font-size: 12px; }
+            .leg-footer { padding: 20px; flex-direction: column; gap: 16px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div data-mit-toggle-here></div>
+    <div class="logo-wrap">
+        <img src="logotipo-08.jpg" alt="Mititilla" class="logo" />
+    </div>
+    <nav class="header-icons" aria-label="Accesos rápidos">
+        <button class="icon-btn" data-target="search" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        </button>
+        <button class="icon-btn" data-target="cart" aria-label="Cesta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
+        </button>
+        <button class="icon-btn" data-target="profile" aria-label="Perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
+        </button>
+        <button class="icon-btn" data-target="community" aria-label="Comunidad">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
+        </button>
+    </nav>
+</header>
+
+<main>
+
+    <!-- Tabs -->
+    <div class="leg-tabs">
+        <button class="leg-tab-btn" data-tab="aviso">AVISO LEGAL</button>
+        <button class="leg-tab-btn" data-tab="privacidad">PRIVACIDAD</button>
+        <button class="leg-tab-btn" data-tab="cookies">COOKIES</button>
+    </div>
+    <hr class="leg-tab-line">
+
+    <!-- ══ TAB: AVISO LEGAL ══ -->
+    <div id="tab-aviso" class="leg-tab-content">
+        <div class="leg-wrap leg-page">
+            <p class="leg-eyebrow">LEGAL <span>•</span> MITITILLA</p>
+            <h1 class="leg-title">aviso legal</h1>
+            <hr class="leg-divider">
+
+            <div class="leg-section">
+                <p class="leg-section-title">TITULAR DEL SITIO WEB</p>
+                <p>En cumplimiento de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico, se informa de los siguientes datos:</p>
+                <p>La titular de este sitio web es Martina Carmona, con domicilio en Granada, España, y dirección de contacto martina.carseg@gmail.com</p>
+                <p>El acceso y uso de este sitio web atribuye la condición de usuario e implica la aceptación plena y sin reservas de todas las disposiciones incluidas en este aviso legal. El usuario se compromete a hacer un uso adecuado de los contenidos y servicios ofrecidos, y a no emplearlos para realizar actividades ilícitas o contrarias a la buena fe.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">PROPIEDAD INTELECTUAL</p>
+                <p>Los contenidos de este sitio web, incluyendo textos, fotografías, ilustraciones, logotipos y diseño gráfico, son propiedad de Martina Carmona o de terceros que han autorizado su uso, y están protegidos por la legislación española e internacional sobre propiedad intelectual e industrial. Queda prohibida su reproducción, distribución, comunicación pública o transformación sin autorización expresa de la titular.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">RESPONSABILIDAD</p>
+                <p>La titular no se hace responsable de los daños o perjuicios que pudieran derivarse del acceso o uso de este sitio web, ni de posibles discrepancias que puedan surgir entre la versión impresa de la guía y el contenido digital publicado en la web. Asimismo, no garantiza la ausencia de virus u otros elementos dañinos que pudieran causar daños en el sistema informático del usuario.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">JURISDICCIÓN</p>
+                <p>Este aviso legal se rige por la legislación española. Para cualquier controversia derivada del acceso o uso de este sitio web, las partes se someten a los juzgados y tribunales de Granada.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ TAB: PRIVACIDAD ══ -->
+    <div id="tab-privacidad" class="leg-tab-content">
+        <div class="leg-wrap leg-page">
+            <p class="leg-eyebrow">PRIVACIDAD <span>•</span> MITITILLA</p>
+            <h1 class="leg-title">privacidad</h1>
+            <hr class="leg-divider">
+
+            <p class="leg-intro">En cumplimiento del Reglamento General de Protección de Datos (RGPD) de la Unión Europea y de la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales, se informa a los usuarios de la siguiente política de privacidad.</p>
+
+            <div class="leg-section">
+                <p class="leg-section-title">RESPONSABLE DEL TRATAMIENTO</p>
+                <p>La responsable del tratamiento de los datos personales recogidos a través de este sitio web es Martina Carmona, con domicilio en Granada, España, y dirección de contacto martina.carseg@gmail.com.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">DATOS QUE SE RECOGEN</p>
+                <p>A través de este sitio web se recogen los siguientes datos personales: nombre y apellidos, dirección de correo electrónico, contraseña, dirección postal de envío y número de teléfono, proporcionados por el usuario en el momento del registro o de la compra. Adicionalmente, los usuarios registrados que participen en la sección Comunidad pueden subir fotografías y textos de forma voluntaria.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">FINALIDAD DEL TRATAMIENTO</p>
+                <p>Los datos recogidos se utilizan para gestionar el registro y el acceso del usuario a la plataforma, tramitar los pedidos y gestionar el envío de la guía física, mantener el sistema de puntos y gestionar el envío del regalo correspondiente cuando se alcanza el umbral establecido, y permitir la participación del usuario en la comunidad de la plataforma.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">BASE JURÍDICA Y CONSERVACIÓN</p>
+                <p>El tratamiento de los datos se basa en la ejecución de la relación contractual derivada de la compra de la guía y en el consentimiento del usuario para participar en la comunidad.</p>
+                <p>Los datos se conservarán durante el tiempo necesario para cumplir con la finalidad para la que fueron recogidos y para atender las posibles responsabilidades legales derivadas de dicho tratamiento.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">TUS DERECHOS</p>
+                <div class="leg-rights-grid">
+                    <div class="leg-right-card">
+                        <svg class="leg-right-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/></svg>
+                        <p class="leg-right-name">ACCESO</p>
+                        <p class="leg-right-desc">Conocer qué datos tuyos tratamos</p>
+                    </div>
+                    <div class="leg-right-card">
+                        <svg class="leg-right-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"/><path d="M13.5 6.5l4 4"/></svg>
+                        <p class="leg-right-name">RECTIFICACIÓN</p>
+                        <p class="leg-right-desc">Corregir datos inexactos o incompletos</p>
+                    </div>
+                    <div class="leg-right-card">
+                        <svg class="leg-right-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l16 0"/><path d="M10 11l0 6"/><path d="M14 11l0 6"/><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/></svg>
+                        <p class="leg-right-name">SUPRESIÓN</p>
+                        <p class="leg-right-desc">Solicitar la eliminación de tus datos</p>
+                    </div>
+                    <div class="leg-right-card">
+                        <svg class="leg-right-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M5.7 5.7l12.6 12.6"/></svg>
+                        <p class="leg-right-name">OPOSICIÓN</p>
+                        <p class="leg-right-desc">Oponerte a determinados tratamientos</p>
+                    </div>
+                    <div class="leg-right-card">
+                        <svg class="leg-right-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"/><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"/><path d="M8 11v-4a4 4 0 1 1 8 0v4"/></svg>
+                        <p class="leg-right-name">LIMITACIÓN</p>
+                        <p class="leg-right-desc">Restringir el uso de tus datos</p>
+                    </div>
+                    <div class="leg-right-card">
+                        <svg class="leg-right-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4l0 12"/></svg>
+                        <p class="leg-right-name">PORTABILIDAD</p>
+                        <p class="leg-right-desc">Recibir tus datos en formato portable</p>
+                    </div>
+                </div>
+                <p>El usuario puede ejercer en cualquier momento sus derechos dirigiéndose por escrito a martina.carseg@gmail.com. Asimismo, tiene derecho a presentar una reclamación ante la Agencia Española de Protección de Datos si considera que el tratamiento de sus datos no es adecuado.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">COMUNICACIÓN DE DATOS A TERCEROS</p>
+                <p>Los datos personales no serán cedidos a terceros salvo obligación legal. No se realizan transferencias internacionales de datos.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">SEGURIDAD</p>
+                <p>La titular adopta las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales y evitar su alteración, pérdida, tratamiento o acceso no autorizado.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ TAB: COOKIES ══ -->
+    <div id="tab-cookies" class="leg-tab-content">
+        <div class="leg-wrap leg-page">
+            <p class="leg-eyebrow">COOKIES <span>•</span> MITITILLA</p>
+            <h1 class="leg-title">política de cookies</h1>
+            <hr class="leg-divider">
+
+            <p class="leg-intro">Este sitio web utiliza cookies y tecnologías similares para mejorar la experiencia de navegación del usuario. A continuación se informa sobre qué son las cookies, qué tipos se utilizan en este sitio y cómo el usuario puede gestionarlas.</p>
+
+            <div class="leg-section">
+                <p class="leg-section-title">QUÉ SON LAS COOKIES</p>
+                <p>Las cookies son pequeños archivos de texto que se almacenan en el dispositivo del usuario cuando visita un sitio web. Permiten que el sitio recuerde información sobre la visita, como las preferencias del usuario o el estado de su sesión, facilitando una experiencia de navegación más fluida y personalizada.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">COOKIES UTILIZADAS EN ESTE SITIO WEB</p>
+                <p>Este sitio web utiliza únicamente cookies técnicas y funcionales, necesarias para el correcto funcionamiento de la plataforma. Entre ellas se incluyen las cookies de sesión, que mantienen al usuario identificado mientras navega por la web sin necesidad de volver a introducir sus credenciales, y las cookies de preferencias, que recuerdan configuraciones elegidas por el usuario durante su navegación.</p>
+
+                <table class="leg-table">
+                    <thead>
+                    <tr>
+                        <th>TIPO</th>
+                        <th>FINALIDAD</th>
+                        <th>DURACIÓN</th>
+                        <th>TERCEROS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Sesión</td>
+                        <td>Mantener al usuario identificado durante la navegación</td>
+                        <td>Sesión</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>Preferencias</td>
+                        <td>Recordar configuraciones elegidas por el usuario</td>
+                        <td>Persistente</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>localStorage</td>
+                        <td>Sistema de puntos, carrito de compra y contenido generado por usuarios. No transmite datos a servidores externos</td>
+                        <td>Persistente</td>
+                        <td>NO</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="leg-info-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M12 8l.01 0"/><path d="M11 12l1 0l0 4l1 0"/></svg>
+                    Este sitio web no utiliza cookies de análisis, publicidad ni rastreo de terceros.
+                </div>
+
+                <p>Adicionalmente, parte de la funcionalidad de la plataforma, como el sistema de puntos, el carrito de compra y el contenido generado por los usuarios, se gestiona mediante localStorage, una tecnología de almacenamiento local del navegador que funciona de forma similar a las cookies pero que no transmite datos a ningún servidor externo.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">GESTIÓN Y DESACTIVACIÓN DE COOKIES</p>
+                <p>El usuario puede configurar su navegador para bloquear o eliminar las cookies almacenadas en su dispositivo. Sin embargo, la desactivación de las cookies técnicas puede afectar al correcto funcionamiento de algunas partes del sitio, como el acceso al perfil de usuario o el carrito de compra. La forma de gestionar las cookies varía según el navegador utilizado; el usuario puede consultar las instrucciones específicas en la configuración de su navegador.</p>
+            </div>
+
+            <div class="leg-section">
+                <p class="leg-section-title">ACTUALIZACIONES DE ESTA POLÍTICA</p>
+                <p>Esta política de cookies puede actualizarse en cualquier momento para adaptarse a cambios normativos o funcionales del sitio web. Se recomienda al usuario revisarla periódicamente.</p>
+                <p>Para cualquier consulta relacionada con el uso de cookies en este sitio web, el usuario puede ponerse en contacto a través de martina.carseg@gmail.com.</p>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="leg-footer">
+    <nav class="leg-footer-nav">
+        <button data-tab="aviso" onclick="showTab('aviso')">AVISO LEGAL</button>
+        <button data-tab="privacidad" onclick="showTab('privacidad')">PRIVACIDAD</button>
+        <button data-tab="cookies" onclick="showTab('cookies')">COOKIES</button>
+    </nav>
+    <img src="logotipo-08.jpg" alt="Mititilla" class="leg-footer-logo">
+</footer>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+
+<script>
+    function showTab(name) {
+        document.querySelectorAll('.leg-tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.leg-tab-btn').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.leg-footer-nav button').forEach(el => el.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+        document.querySelector('.leg-tab-btn[data-tab="' + name + '"]').classList.add('active');
+        document.querySelector('.leg-footer-nav button[data-tab="' + name + '"]').classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    // Al cargar, leer el hash de la URL
+    const hash = window.location.hash.replace('#', '') || 'aviso';
+    showTab(['aviso','privacidad','cookies'].includes(hash) ? hash : 'aviso');
+
+    // Los tab buttons también llaman a showTab
+    document.querySelectorAll('.leg-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => showTab(btn.dataset.tab));
+    });
+</script>
+
+</body>
+</html>
