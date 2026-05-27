@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil — Mititilla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        .site-footer--shop {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 40px; border-top: 1px solid var(--border);
+        }
+        .footer-nav--shop { justify-content: flex-start; gap: 32px; }
+        .footer-logo-img { height: 44px; object-fit: contain; display: block; }
+
+        .pf-dashboard {
+            max-width: 1100px; margin: 0 auto;
+            padding: 52px 40px 80px;
+        }
+
+        .pf-hero {
+            display: grid;
+            grid-template-columns: 170px 1fr 220px;
+            gap: 40px;
+            align-items: start;
+            padding-bottom: 52px;
+        }
+
+        .pf-hero-photo img {
+            width: 100%; aspect-ratio: 3/4;
+            object-fit: cover; display: block;
+        }
+
+        .pf-breadcrumb {
+            font-size: 11px; font-weight: 600; letter-spacing: .1em;
+            color: #555; margin-bottom: 8px; text-transform: uppercase;
+        }
+
+        .pf-name {
+            font-size: clamp(36px, 4vw, 52px);
+            font-weight: 800; letter-spacing: -1.5px;
+            line-height: 1; margin-bottom: 14px; color: #000;
+        }
+
+        .pf-meta {
+            display: flex; gap: 20px; align-items: center;
+            margin-bottom: 16px; flex-wrap: wrap;
+        }
+
+        .pf-meta-item {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 13px; font-weight: 400; color: #444;
+        }
+
+        .pf-bio {
+            font-size: 13px; font-weight: 300; line-height: 1.55;
+            color: #555; max-width: 360px; margin-bottom: 22px;
+        }
+
+        .pf-hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        .pf-btn-edit {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: #000; color: #fff; border: none;
+            padding: 10px 18px;
+            font-family: 'Inter', sans-serif; font-size: 12px;
+            font-weight: 600; letter-spacing: .04em;
+            cursor: pointer; border-radius: 4px; transition: opacity .15s;
+        }
+        .pf-btn-edit:hover { opacity: .75; }
+
+        .pf-btn-new {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: none; color: #000; border: 1.5px solid #000;
+            padding: 10px 18px;
+            font-family: 'Inter', sans-serif; font-size: 12px;
+            font-weight: 600; letter-spacing: .04em;
+            cursor: pointer; border-radius: 4px; transition: opacity .15s;
+        }
+        .pf-btn-new:hover { opacity: .6; }
+
+        .pf-friends { padding-top: 32px; }
+
+        .pf-friends-title {
+            font-size: 10px; font-weight: 700; letter-spacing: .1em;
+            color: #000; margin-bottom: 18px; text-transform: uppercase;
+        }
+
+        .pf-friends-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+        .pf-friend-item {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 12px; font-weight: 600;
+            letter-spacing: .04em; color: #000; text-transform: uppercase;
+        }
+
+        .pf-friend-avatar {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: #111; flex-shrink: 0;
+        }
+
+        .pf-stats {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 48px; align-items: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 64px;
+        }
+
+        .pf-stat-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+
+        .pf-stat-box {
+            background: #c64439; color: #fff;
+            padding: 14px 18px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            min-width: 90px; min-height: 78px;
+        }
+
+        .pf-stat-num { font-size: 30px; font-weight: 800; line-height: 1; }
+
+        .pf-stat-label {
+            font-size: 8px; font-weight: 700;
+            letter-spacing: .06em; margin-top: 4px;
+            text-transform: uppercase; text-align: center; line-height: 1.3;
+        }
+
+        .pf-progress-label {
+            font-size: 10px; font-weight: 700; letter-spacing: .1em;
+            color: #555; margin-bottom: 6px; text-transform: uppercase;
+        }
+
+        .pf-progress-num {
+            font-size: 54px; font-weight: 800; line-height: 1;
+            margin-bottom: 16px; letter-spacing: -2px; color: #000;
+        }
+
+        .pf-progress-num span { font-size: 26px; font-weight: 400; letter-spacing: -1px; }
+
+        .pf-progress-bar-wrap {
+            position: relative; height: 10px;
+            background: #e0e0e0; border-radius: 5px; margin-bottom: 6px;
+        }
+
+        .pf-progress-bar {
+            position: absolute; left: 0; top: 0; bottom: 0;
+            background: #c64439; border-radius: 5px;
+        }
+
+        .pf-progress-scale { display: flex; justify-content: space-between; margin-bottom: 14px; }
+        .pf-progress-scale span { font-size: 9px; color: #aaa; font-weight: 300; }
+
+        .pf-progress-note {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; font-weight: 300; color: #555;
+            border: 1px solid var(--border); padding: 8px 14px; border-radius: 4px;
+        }
+
+        .pf-next-reward { text-align: right; }
+
+        .pf-next-label {
+            font-size: 10px; font-weight: 700; letter-spacing: .08em;
+            color: #000; text-transform: uppercase; margin-bottom: 4px;
+        }
+
+        .pf-next-value { font-size: 12px; font-weight: 300; color: #555; }
+
+        .pf-section-heading {
+            font-size: 17px; font-weight: 800;
+            letter-spacing: .01em; margin-bottom: 20px;
+            text-transform: uppercase; color: #000;
+        }
+
+        .pf-rdot { color: #c64439; }
+
+        .pf-pub-section { margin-bottom: 64px; }
+
+        .pf-pub-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+
+        .pf-pub-cell { aspect-ratio: 1; overflow: hidden; background: #f0f0f0; }
+
+        .pf-pub-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .pf-pub-cell--empty {
+            display: flex; align-items: center;
+            justify-content: center; color: #bbb;
+        }
+
+        .pf-history-section { margin-bottom: 80px; }
+
+        .pf-history-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .pf-history-item {
+            display: flex; align-items: center; gap: 18px;
+            padding: 18px 20px;
+            border: 1px solid var(--border); border-radius: 6px;
+        }
+
+        .pf-history-item--pending { opacity: .45; }
+
+        .pf-history-icon {
+            width: 36px; height: 36px;
+            display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0; color: #c64439;
+        }
+
+        .pf-history-item--pending .pf-history-icon { color: #aaa; }
+
+        .pf-history-text { flex: 1; }
+
+        .pf-history-title {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: .05em; text-transform: uppercase;
+            color: #000; margin-bottom: 3px;
+        }
+
+        .pf-history-date { font-size: 11px; font-weight: 300; color: #888; }
+
+        .pf-history-points { text-align: right; flex-shrink: 0; }
+
+        .pf-points-earned {
+            display: block; font-size: 22px;
+            font-weight: 800; color: #c64439; line-height: 1;
+        }
+
+        .pf-history-item--pending .pf-points-earned { font-size: 18px; color: #999; }
+
+        .pf-points-total { font-size: 10px; font-weight: 300; color: #888; }
+
+        @media (max-width: 900px) {
+            .pf-hero { grid-template-columns: 140px 1fr; }
+            .pf-friends { display: none; }
+            .pf-stats { grid-template-columns: 1fr; gap: 32px; }
+            .pf-next-reward { text-align: left; }
+        }
+
+        @media (max-width: 600px) {
+            .pf-dashboard { padding: 32px 20px 60px; }
+            .pf-hero { grid-template-columns: 1fr; gap: 20px; }
+            .pf-progress-num { font-size: 40px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div data-mit-toggle-here></div>
+    <div class="logo-wrap">
+        <img src="logotipo-08.jpg" alt="Mititilla" class="logo" />
+    </div>
+    <nav class="header-icons" aria-label="Accesos rápidos">
+        <button class="icon-btn" data-target="search" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        </button>
+        <button class="icon-btn" data-target="cart" aria-label="Cesta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
+        </button>
+        <button class="icon-btn" data-target="profile" aria-label="Perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
+        </button>
+        <button class="icon-btn" data-target="community" aria-label="Comunidad">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
+        </button>
+    </nav>
+</header>
+
+
+<!-- ESTADO 1: FORMULARIOS -->
+<div id="pfForms">
+    <div class="profile-layout">
+
+        <aside class="profile-sidebar">
+            <div class="profile-avatar-wrap">
+                <img src="foto-perfil.jpg" alt="Luis Lara" class="profile-avatar" />
+            </div>
+            <h2 class="profile-name">Luis Lara</h2>
+            <p class="profile-email-text">luis.lara@gmail.com</p>
+            <div class="profile-points-row">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c64439" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/></svg>
+                <span class="points-num">70</span>
+                <span class="points-label">puntos acumulados</span>
+            </div>
+            <hr class="profile-hr" />
+            <nav class="profile-sidenav">
+                <button class="sidenav-item active" data-section="datos">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
+                    Datos personales
+                </button>
+                <button class="sidenav-item" data-section="direccion">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"/></svg>
+                    Dirección de envío
+                </button>
+                <button class="sidenav-item" data-section="contrasena">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z"/><path d="M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0"/><path d="M8 11v-4a4 4 0 1 1 8 0v4"/></svg>
+                    Contraseña
+                </button>
+                <button class="sidenav-item" data-section="pedidos">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12l0 9"/><path d="M12 12l-8 -4.5"/></svg>
+                    Mis pedidos
+                </button>
+            </nav>
+            <hr class="profile-hr" />
+            <button class="sidenav-item" data-section="logout">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"/><path d="M9 12h12l-3 -3"/><path d="M18 15l3 -3"/></svg>
+                Cerrar sesión
+            </button>
+            <button class="sidenav-item sidenav-item--danger" data-section="delete">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l16 0"/><path d="M10 11l0 6"/><path d="M14 11l0 6"/><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/></svg>
+                Eliminar cuenta
+            </button>
+        </aside>
+
+        <main class="profile-main">
+
+            <section class="profile-section" id="section-datos">
+                <p class="profile-breadcrumb">PERFIL <span style="color:#c64439;">•</span> COMUNIDAD MITITILLA</p>
+                <h1 class="profile-section-title">Datos personales</h1>
+                <form class="profile-form" id="formDatos">
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label class="form-label">NOMBRE <span class="required">*</span></label>
+                            <input type="text" class="form-input" value="Luis" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">APELLIDOS <span class="required">*</span></label>
+                            <input type="text" class="form-input" value="Lara" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">EMAIL <span class="required">*</span></label>
+                        <input type="email" class="form-input" value="luis.lara@gmail.com" />
+                    </div>
+                    <div class="form-group form-group--half">
+                        <label class="form-label">TELÉFONO (OPCIONAL)</label>
+                        <input type="tel" class="form-input" value="+34 606 53 49 80" />
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-profile-primary">INICIAR SESIÓN</button>
+                        <button type="button" class="btn-profile-secondary" data-cancel>CANCELAR</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="profile-section hidden" id="section-direccion">
+                <p class="profile-breadcrumb">PERFIL <span style="color:#c64439;">•</span> COMUNIDAD MITITILLA</p>
+                <h1 class="profile-section-title">Dirección de envío</h1>
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label class="form-label">CALLE Y NÚMERO <span class="required">*</span></label>
+                        <input type="text" class="form-input" placeholder="Calle Gran Vía, 12" />
+                    </div>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label class="form-label">CIUDAD <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="Granada" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CÓDIGO POSTAL <span class="required">*</span></label>
+                            <input type="text" class="form-input" placeholder="18001" />
+                        </div>
+                    </div>
+                    <div class="form-group form-group--half">
+                        <label class="form-label">PROVINCIA</label>
+                        <input type="text" class="form-input" placeholder="Granada" />
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-profile-primary">GUARDAR CAMBIOS</button>
+                        <button type="button" class="btn-profile-secondary" data-cancel>CANCELAR</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="profile-section hidden" id="section-contrasena">
+                <p class="profile-breadcrumb">PERFIL <span style="color:#c64439;">•</span> COMUNIDAD MITITILLA</p>
+                <h1 class="profile-section-title">Contraseña</h1>
+                <form class="profile-form">
+                    <div class="form-group form-group--half">
+                        <label class="form-label">CONTRASEÑA ACTUAL <span class="required">*</span></label>
+                        <input type="password" class="form-input" />
+                    </div>
+                    <div class="form-group form-group--half">
+                        <label class="form-label">NUEVA CONTRASEÑA <span class="required">*</span></label>
+                        <input type="password" class="form-input" />
+                    </div>
+                    <div class="form-group form-group--half">
+                        <label class="form-label">CONFIRMAR NUEVA CONTRASEÑA <span class="required">*</span></label>
+                        <input type="password" class="form-input" />
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-profile-primary">GUARDAR CAMBIOS</button>
+                        <button type="button" class="btn-profile-secondary" data-cancel>CANCELAR</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="profile-section hidden" id="section-pedidos">
+                <p class="profile-breadcrumb">PERFIL <span style="color:#c64439;">•</span> COMUNIDAD MITITILLA</p>
+                <h1 class="profile-section-title">Mis pedidos</h1>
+                <div class="orders-list">
+                    <div class="order-card">
+                        <div class="order-card-top">
+                            <p class="order-card-ref">Pedido #MIT-47291</p>
+                            <p class="order-card-status">Enviado ✓</p>
+                        </div>
+                        <p class="order-card-name">Mititilla — Guía Gastronómica</p>
+                        <p class="order-card-detail">1 unidad · 24,00€ · 27 mayo 2026</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+
+<!-- ESTADO 2: DASHBOARD -->
+<div id="pfDashboard" class="hidden">
+    <div class="pf-dashboard">
+
+        <section class="pf-hero">
+            <div class="pf-hero-photo">
+                <img src="luis cudardo.png" alt="Luis Lara" />
+            </div>
+            <div class="pf-hero-info">
+                <p class="pf-breadcrumb">PERFIL <span style="color:#c64439">•</span> COMUNIDAD MITITILLA</p>
+                <h1 class="pf-name">LUIS LARA</h1>
+                <div class="pf-meta">
+                <span class="pf-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"/><path d="M16 3v4"/><path d="M8 3v4"/><path d="M4 11h16"/></svg>
+                    Desde febrero 2026
+                </span>
+                    <span class="pf-meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"/><path d="M3 7l9 6l9 -6"/></svg>
+                    luis.lara@gmail.com
+                </span>
+                </div>
+                <p class="pf-bio">Un mapa ilustrado y desplegable que localiza un top 3 dentro de 7 categorías (café, tapas, copas, restaurantes, etc). Los mejores sitios para visitar en Granada.</p>
+                <div class="pf-hero-actions">
+                    <button class="pf-btn-edit" id="btnEditarDatos">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"/><path d="M13.5 6.5l4 4"/></svg>
+                        EDITAR DATOS
+                    </button>
+                    <button class="pf-btn-new">+ NUEVA PUBLICACIÓN</button>
+                </div>
+            </div>
+            <div class="pf-friends">
+                <p class="pf-friends-title">TUS AMIGOS• MITITILLA</p>
+                <ul class="pf-friends-list">
+                    <li class="pf-friend-item"><span class="pf-friend-avatar"></span>LAURA CUADRADO</li>
+                    <li class="pf-friend-item"><span class="pf-friend-avatar"></span>LUCÍA HERNÁNDEZ</li>
+                    <li class="pf-friend-item"><span class="pf-friend-avatar"></span>PALOMA DÍAZ</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="pf-stats">
+            <div class="pf-stat-boxes">
+                <div class="pf-stat-box"><span class="pf-stat-num">70</span><span class="pf-stat-label">PUNTOS</span></div>
+                <div class="pf-stat-box"><span class="pf-stat-num">04</span><span class="pf-stat-label">POSTS</span></div>
+                <div class="pf-stat-box"><span class="pf-stat-num">01</span><span class="pf-stat-label">PEDIDO(S)</span></div>
+                <div class="pf-stat-box"><span class="pf-stat-num">30</span><span class="pf-stat-label">PTOS PARA EL REGALO</span></div>
+            </div>
+            <div class="pf-progress-block">
+                <p class="pf-progress-label">PROGRESO HACIA EL REGALO</p>
+                <p class="pf-progress-num">70 <span>/ 100 PTOS.</span></p>
+                <div class="pf-progress-bar-wrap"><div class="pf-progress-bar" style="width:70%"></div></div>
+                <div class="pf-progress-scale"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+                <p class="pf-progress-note">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-2z"/><path d="M12 8l0 13"/><path d="M19 12v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0 -5a4.8 8 0 0 1 4.5 5a4.8 8 0 0 1 4.5 -5a2.5 2.5 0 0 1 0 5"/></svg>
+                    Te faltan 30 puntos para recibir tu regalo en casa
+                </p>
+            </div>
+            <div class="pf-next-reward">
+                <p class="pf-next-label">SIGUIENTE RECOMPENSA</p>
+                <p class="pf-next-value">+10 ptos. con foto copy</p>
+            </div>
+        </section>
+
+        <section class="pf-pub-section">
+            <h2 class="pf-section-heading">MIS PUBLICACIONES <span class="pf-rdot">•</span> COMUNIDAD MITITILLA</h2>
+            <div class="pf-pub-grid">
+                <div class="pf-pub-cell"><img src="pareja.png" alt="" /></div>
+                <div class="pf-pub-cell"><img src="pionono.png" alt="" /></div>
+                <div class="pf-pub-cell"><img src="myrta.png" alt="" /></div>
+                <div class="pf-pub-cell"><img src="tapas.png" alt="" /></div>
+                <div class="pf-pub-cell"><img src="alejandro.png" alt="" /></div>
+                <div class="pf-pub-cell pf-pub-cell--empty">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></svg>
+                </div>
+            </div>
+        </section>
+
+        <section class="pf-history-section">
+            <h2 class="pf-section-heading">HISTORIAL DE PUNTOS <span class="pf-rdot">•</span> 5 EVENTOS</h2>
+            <div class="pf-history-list">
+
+                <div class="pf-history-item">
+                    <div class="pf-history-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
+                    </div>
+                    <div class="pf-history-text">
+                        <p class="pf-history-title">COMPRA DE LA GUÍA GASTRONÓMICA</p>
+                        <p class="pf-history-date">12 may. 2026 • 10:34</p>
+                    </div>
+                    <div class="pf-history-points">
+                        <span class="pf-points-earned">+25</span>
+                        <span class="pf-points-total">25 total</span>
+                    </div>
+                </div>
+
+                <div class="pf-history-item">
+                    <div class="pf-history-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/></svg>
+                    </div>
+                    <div class="pf-history-text">
+                        <p class="pf-history-title">BONIFICACIÓN DE BIENVENIDA</p>
+                        <p class="pf-history-date">12 may. 2026 • 10:40</p>
+                    </div>
+                    <div class="pf-history-points">
+                        <span class="pf-points-earned">+20</span>
+                        <span class="pf-points-total">20 total</span>
+                    </div>
+                </div>
+
+                <div class="pf-history-item">
+                    <div class="pf-history-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"/><path d="M13.5 6.5l4 4"/></svg>
+                    </div>
+                    <div class="pf-history-text">
+                        <p class="pf-history-title">EXPERIENCIA DETALLADA PUBLICADA</p>
+                        <p class="pf-history-date">16 may. 2026 • 12:05</p>
+                    </div>
+                    <div class="pf-history-points">
+                        <span class="pf-points-earned">+15</span>
+                        <span class="pf-points-total">15 total</span>
+                    </div>
+                </div>
+
+                <div class="pf-history-item">
+                    <div class="pf-history-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"/><path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></svg>
+                    </div>
+                    <div class="pf-history-text">
+                        <p class="pf-history-title">FOTO CON COPY PUBLICADA</p>
+                        <p class="pf-history-date">14 may. 2026 • 17:20</p>
+                    </div>
+                    <div class="pf-history-points">
+                        <span class="pf-points-earned">+10</span>
+                        <span class="pf-points-total">10 total</span>
+                    </div>
+                </div>
+
+                <div class="pf-history-item pf-history-item--pending">
+                    <div class="pf-history-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M9 12l2 2l4 -4"/></svg>
+                    </div>
+                    <div class="pf-history-text">
+                        <p class="pf-history-title">REGALO FÍSICO ENVIADO</p>
+                        <p class="pf-history-date">Pendiente • Alcanza 100 puntos</p>
+                    </div>
+                    <div class="pf-history-points">
+                        <span class="pf-points-earned">—</span>
+                        <span class="pf-points-total">100 meta</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</div>
+
+
+<!-- Modal cerrar sesión -->
+<div id="logoutModal" class="profile-modal hidden">
+    <div class="profile-modal-box">
+        <p class="profile-modal-title">¿Cerrar sesión?</p>
+        <div class="profile-modal-actions">
+            <button class="btn-profile-primary" id="confirmLogout">CERRAR SESIÓN</button>
+            <button class="btn-profile-secondary" id="cancelLogout">CANCELAR</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal eliminar cuenta -->
+<div id="deleteModal" class="profile-modal hidden">
+    <div class="profile-modal-box">
+        <p class="profile-modal-title">¿Eliminar tu cuenta?</p>
+        <p class="profile-modal-desc">Esta acción es irreversible. Se eliminarán todos tus datos y publicaciones.</p>
+        <div class="profile-modal-actions">
+            <button class="btn-profile-danger" id="confirmDelete">ELIMINAR CUENTA</button>
+            <button class="btn-profile-secondary" id="cancelDelete">CANCELAR</button>
+        </div>
+    </div>
+</div>
+
+<footer class="site-footer site-footer--shop">
+    <nav class="footer-nav footer-nav--shop">
+        <a href="#">AVISO LEGAL</a>
+        <a href="#">PRIVACIDAD</a>
+        <a href="#">COOKIES</a>
+    </nav>
+    <img src="logotipo-08.jpg" alt="Mititilla" class="footer-logo-img" />
+</footer>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script src="script.js" defer></script>
+<script>
+    const allSections = document.querySelectorAll('.profile-section');
+    const sidenavBtns = document.querySelectorAll('.sidenav-item[data-section]');
+
+    function showSection(id) {
+        allSections.forEach(s => s.classList.add('hidden'));
+        const t = document.getElementById('section-' + id);
+        if (t) t.classList.remove('hidden');
+    }
+
+    sidenavBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sec = btn.dataset.section;
+            if (sec === 'logout') { document.getElementById('logoutModal').classList.remove('hidden'); return; }
+            if (sec === 'delete') { document.getElementById('deleteModal').classList.remove('hidden'); return; }
+            sidenavBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            showSection(sec);
+        });
+    });
+
+    document.querySelectorAll('[data-cancel]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            sidenavBtns.forEach(b => b.classList.remove('active'));
+            document.querySelector('[data-section="datos"]').classList.add('active');
+            showSection('datos');
+        });
+    });
+
+    /* INICIAR SESIÓN → dashboard */
+    document.getElementById('formDatos').addEventListener('submit', function(e) {
+        e.preventDefault();
+        document.getElementById('pfForms').classList.add('hidden');
+        document.getElementById('pfDashboard').classList.remove('hidden');
+        window.scrollTo(0, 0);
+    });
+
+    /* EDITAR DATOS → formulario */
+    document.getElementById('btnEditarDatos').addEventListener('click', function() {
+        document.getElementById('pfDashboard').classList.add('hidden');
+        document.getElementById('pfForms').classList.remove('hidden');
+        sidenavBtns.forEach(b => b.classList.remove('active'));
+        document.querySelector('[data-section="datos"]').classList.add('active');
+        showSection('datos');
+        window.scrollTo(0, 0);
+    });
+
+    /* Guardar en otras secciones */
+    document.querySelectorAll('.profile-form:not(#formDatos)').forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            toast.textContent = '✓ Cambios guardados correctamente';
+            toast.classList.remove('hidden');
+            setTimeout(function() { toast.classList.add('hidden'); }, 2500);
+        });
+    });
+
+    document.getElementById('confirmLogout').addEventListener('click', () => { window.location.href = 'index.html'; });
+    document.getElementById('cancelLogout').addEventListener('click',  () => { document.getElementById('logoutModal').classList.add('hidden'); });
+    document.getElementById('confirmDelete').addEventListener('click', () => {
+        document.getElementById('deleteModal').classList.add('hidden');
+        const toast = document.getElementById('toast');
+        toast.textContent = 'Cuenta eliminada (demo)';
+        toast.classList.remove('hidden');
+        setTimeout(() => { toast.classList.add('hidden'); window.location.href = 'index.html'; }, 2000);
+    });
+    document.getElementById('cancelDelete').addEventListener('click',  () => { document.getElementById('deleteModal').classList.add('hidden'); });
+</script>
+
+</body>
+</html>

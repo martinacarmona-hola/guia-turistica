@@ -1,29 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test de Personalidad</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mititilla — Granada en papel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Test de Personalidad - Modelo de los Cinco Grandes</h1>
-        <div id="intro">
-            <p>Bienvenido al test de personalidad basado en el modelo de los Cinco Grandes factores: Extraversión, Amabilidad, Conciencia, Neuroticismo y Apertura. Responde las preguntas honestamente para obtener tu perfil.</p>
-            <button id="start-btn">Comenzar Test</button>
-        </div>
-        <div id="test" style="display: none;">
-            <div id="sections"></div>
-            <button id="next-btn" style="display: none;">Siguiente</button>
-            <button id="finish-btn" style="display: none;">Finalizar</button>
-        </div>
-        <div id="results" style="display: none;">
-            <h2>Tu Perfil de Personalidad</h2>
-            <div id="profile"></div>
-        </div>
+<header class="site-header">
+    <!-- Placeholder: el script inyecta aquí el botón hamburguesa correcto -->
+    <div data-mit-toggle-here></div>
+
+    <div class="logo-wrap">
+        <img src="logotipo-08.jpg" alt="Mititilla" class="logo" />
     </div>
-    <script src="script.js"></script>
+
+    <nav class="header-icons" aria-label="Accesos rápidos">
+        <!-- search -->
+        <button class="icon-btn" data-target="search" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        </button>
+
+        <!-- shopping-bag -->
+        <button class="icon-btn" data-target="cart" aria-label="Cesta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
+        </button>
+
+        <!-- user -->
+        <button class="icon-btn" data-target="profile" aria-label="Perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
+        </button>
+
+        <!-- layout-grid / comunidad -->
+        <button class="icon-btn" data-target="community" aria-label="Comunidad">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
+        </button>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-left">
+            <img src="IMAGEN HOME.jpg" class="hero-img" />
+            <div class="hero-visual" role="img" aria-label="Imagen principal"></div>
+        </div>
+
+        <div class="hero-right">
+            <p class="eyebrow">GUÍA GASTRONÓMICA <span class="dot" style="color:#c64439;">•</span> MITITILLA</p>
+
+            <img src="GRANADA NEGRO.jpg" class="hero-title-img" />
+
+            <p class="hero-desc">Un mapa ilustrado y desplegable que localiza un top 3 dentro de 7 categorías (café, tapas, copas, restaurantes, etc). Los mejores sitios para visitar en Granada.</p>
+
+            <div class="hero-actions">
+                <a href="tienda.html" class="cta-btn" id="buyGuide">COMPRAR GUÍA <span class="arrow">→</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fila decorativa de iconos verdes -->
+    <div class="icon-row">
+        <img src="web mititilla-16.jpg" class="ICON" />
+    </div>
+
+    <!-- Sección roja: Comunidad Exclusiva -->
+    <section class="exclusive-section">
+        <div class="exclusive-left">
+            <p class="exclusive-eyebrow">COMUNIDAD EXCLUSIVA • COMPRADORES</p>
+            <img src="COMPARTE TU GRANADA.png" alt="Comparte tu Granada" class="exclusive-title-img" />
+            <p class="exclusive-desc">Compra la guía, únete a la comunidad y gana puntos con cada publicación. Acumula 100 puntos y recibe un regalo físico en tu dirección.</p>
+        </div>
+
+        <div class="exclusive-center">
+            <img src="ESTRELLA BLANCA.png" alt="Estrella" class="star-img" />
+        </div>
+
+        <div class="exclusive-right">
+            <img src="MITITITLLA BLANCO.png" alt="Mititilla Guía Gastronómica" class="logo-img" />
+            <button class="perfiles-btn">VER PERFILES</button>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <nav class="footer-nav">
+        <a href="#">AVISO LEGAL</a>
+        <a href="#">PRIVACIDAD</a>
+        <a href="#">COOKIES</a>
+    </nav>
+</footer>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script src="script.js" defer></script>
 </body>
 </html>
