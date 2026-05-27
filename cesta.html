@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tienda — Mititilla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+
+        /* ══════════════════════════
+           CHECKOUT — TIENDA
+        ══════════════════════════ */
+
+        .tk-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 40px 80px;
+        }
+
+        .tk-eyebrow {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .12em; text-transform: uppercase;
+            margin: 0 0 32px; color: #000;
+        }
+        .tk-eyebrow-muted { color: #aaa; }
+        .tk-eyebrow-dot { color: var(--red); }
+
+        /* ── Stepper ── */
+        .tk-stepper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 52px;
+        }
+
+        .tk-step-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .tk-step-num {
+            width: 48px; height: 48px;
+            border: 2px solid #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            flex-shrink: 0;
+            color: #000;
+        }
+
+        .tk-step-num.is-active {
+            background: var(--red);
+            border-color: var(--red);
+            color: white;
+        }
+
+        .tk-step-num.is-done {
+            background: #000;
+            border-color: #000;
+            color: white;
+        }
+
+        .tk-step-label {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #000;
+        }
+
+        .tk-step-line {
+            flex: 1;
+            height: 1px;
+            background: #000;
+            margin: 0 16px;
+        }
+
+        /* ── Contenido pasos ── */
+        .tk-step-content.hidden { display: none; }
+
+        /* ── Títulos de sección ── */
+        .tk-section-title {
+            font-size: 14px; font-weight: 700;
+            letter-spacing: .08em; text-transform: uppercase;
+            color: #000; margin: 0 0 12px;
+        }
+        .tk-section-title span { color: var(--red); }
+
+        .tk-section-line {
+            border: none;
+            border-top: 1px solid #000;
+            margin: 0 0 40px;
+        }
+
+        /* ── Botones ── */
+        .tk-btn-primary {
+            background: #000; color: white;
+            border: none; padding: 18px 32px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            cursor: pointer;
+        }
+        .tk-btn-primary:hover { background: #222; }
+
+        .tk-btn-outline {
+            background: none; color: #000;
+            border: 2px solid #000; padding: 16px 28px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            cursor: pointer;
+        }
+        .tk-btn-outline:hover { background: #000; color: white; }
+
+        /* ══ STEP 1: CESTA ══ */
+
+        .tk-cart-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 40px;
+        }
+
+        .tk-cart-img-placeholder {
+            width: 100%; aspect-ratio: 4/5;
+            background: #111; display: block;
+        }
+
+        .tk-cart-img img {
+            width: 100%; aspect-ratio: 4/5;
+            object-fit: cover; display: block;
+        }
+
+        .tk-cart-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tk-cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .tk-cart-category {
+            font-size: 11px; font-weight: 500;
+            letter-spacing: .08em; text-transform: uppercase;
+            color: #666; line-height: 1.6; margin: 0;
+        }
+
+        .tk-points-badge { text-align: right; flex-shrink: 0; }
+
+        .tk-points-badge-num {
+            font-size: 32px; font-weight: 800;
+            color: var(--red); line-height: 1; display: block;
+        }
+
+        .tk-points-badge-label {
+            font-size: 10px; font-weight: 500;
+            letter-spacing: .08em; text-transform: uppercase;
+            color: var(--red);
+        }
+
+        .tk-cart-brand {
+            font-size: 52px; font-weight: 800;
+            letter-spacing: -.02em; text-transform: lowercase;
+            color: #000; line-height: 1; margin: 0;
+        }
+
+        .tk-cart-desc {
+            font-size: 14px; font-weight: 400;
+            line-height: 1.65; color: #333; margin: 0;
+        }
+
+        .tk-cart-price {
+            font-size: 36px; font-weight: 700;
+            color: #000; margin: 0;
+        }
+
+        .tk-cart-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tk-qty {
+            display: flex;
+            align-items: center;
+            border: 1px solid #000;
+        }
+
+        .tk-qty-btn {
+            width: 36px; height: 36px;
+            background: none; border: none;
+            font-size: 16px; cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .tk-qty-btn:hover { background: #f0f0f0; }
+
+        .tk-qty-num {
+            width: 40px; text-align: center;
+            font-size: 14px; font-weight: 600;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            height: 36px; line-height: 36px;
+            display: inline-block;
+        }
+
+        .tk-eliminar-btn {
+            background: none; border: 1px solid #ccc;
+            padding: 8px 16px;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            cursor: pointer; color: #666;
+        }
+        .tk-eliminar-btn:hover { border-color: #000; color: #000; }
+
+        .tk-cart-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* ══ STEP 2: DATOS ══ */
+
+        .tk-form-section { margin-bottom: 48px; }
+
+        .tk-form-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .tk-form-group {
+            display: flex; flex-direction: column;
+            gap: 6px; margin-bottom: 20px;
+        }
+
+        .tk-form-label {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #000;
+        }
+        .tk-form-label span { color: var(--red); margin-left: 2px; }
+
+        .tk-form-input {
+            border: 1px solid #ccc;
+            padding: 12px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; font-weight: 400;
+            color: #000; outline: none;
+            width: 100%; box-sizing: border-box;
+        }
+        .tk-form-input:focus { border-color: #000; }
+
+        .tk-form-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 8px 0 32px;
+        }
+
+        .tk-form-check input[type="checkbox"] {
+            width: 18px; height: 18px;
+            accent-color: var(--red);
+            flex-shrink: 0; margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .tk-form-check label {
+            font-size: 13px; font-weight: 400;
+            color: #333; line-height: 1.5; cursor: pointer;
+        }
+        .tk-form-check label a { color: #000; text-decoration: underline; }
+
+        .tk-form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+        }
+
+        .tk-promo-banner {
+            background: var(--red); color: white;
+            padding: 18px 40px;
+            display: flex; align-items: center; gap: 16px;
+            margin-top: 52px;
+            font-size: 12px; font-weight: 700;
+            letter-spacing: .08em; text-transform: uppercase;
+        }
+
+        /* ══ STEP 3: PAGO ══ */
+
+        .tk-pay-product {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 28px;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .tk-pay-img-placeholder {
+            width: 140px; height: 140px;
+            background: #111; display: block;
+        }
+
+        .tk-pay-img img {
+            width: 140px; height: 140px;
+            object-fit: cover; display: block;
+        }
+
+        .tk-pay-product-category {
+            font-size: 10px; font-weight: 500;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #666; margin: 0 0 6px; line-height: 1.6;
+        }
+
+        .tk-pay-product-brand {
+            font-size: 36px; font-weight: 800;
+            letter-spacing: -.02em; text-transform: lowercase;
+            color: #000; margin: 0 0 12px;
+        }
+
+        .tk-pay-qty-badge {
+            display: inline-flex;
+            align-items: center; gap: 8px;
+            border: 1px solid #000;
+            padding: 5px 12px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .08em; text-transform: uppercase;
+        }
+
+        .tk-pay-layout {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .tk-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px; font-weight: 400;
+            color: #333;
+        }
+        .tk-price-row:first-child { border-top: 1px solid #e0e0e0; }
+
+        .tk-price-label {
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .08em; text-transform: uppercase;
+        }
+
+        .tk-price-row--total {
+            border-bottom: none;
+            padding-top: 24px;
+        }
+        .tk-price-row--total .tk-price-label {
+            font-size: 13px; font-weight: 800;
+        }
+        .tk-price-row--total .tk-price-amount {
+            font-size: 32px; font-weight: 800;
+            color: #000;
+        }
+
+        .tk-shipping-box {
+            background: #f5f5f5;
+            padding: 20px 24px;
+            display: flex; gap: 14px;
+            align-items: flex-start;
+            width: 300px;
+            margin-bottom: 24px;
+            box-sizing: border-box;
+        }
+        .tk-shipping-box svg { flex-shrink: 0; margin-top: 2px; }
+        .tk-shipping-box p {
+            font-size: 13px; font-weight: 400;
+            line-height: 1.6; color: #333; margin: 0;
+        }
+
+        /* ══ STEP 4: CONFIRMACIÓN ══ */
+
+        .tk-confirm-hero {
+            border: 2px solid #000;
+            padding: 32px 40px;
+            margin-bottom: 52px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .tk-confirm-hero-top {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .tk-check-box {
+            width: 56px; height: 56px;
+            background: #000;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .tk-confirm-title {
+            font-size: 48px; font-weight: 800;
+            letter-spacing: -.02em; text-transform: lowercase;
+            color: #000; margin: 0; line-height: 1;
+        }
+
+        .tk-confirm-sub {
+            font-size: 14px; font-weight: 400;
+            color: #333; margin: 0;
+        }
+
+        .tk-confirm-ref {
+            font-size: 11px; font-weight: 700;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #000; margin: 0;
+        }
+        .tk-confirm-ref span { color: var(--red); }
+
+        .tk-confirm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 52px;
+        }
+
+        .tk-confirm-card {
+            border: 1px solid #e0e0e0;
+            padding: 20px 24px;
+        }
+
+        .tk-confirm-label {
+            font-size: 10px; font-weight: 700;
+            letter-spacing: .12em; text-transform: uppercase;
+            color: #666; margin: 0 0 6px;
+        }
+
+        .tk-confirm-value {
+            font-size: 14px; font-weight: 400;
+            color: #000; margin: 0; line-height: 1.5;
+        }
+        .tk-confirm-value--red { color: var(--red); font-weight: 600; }
+
+        .tk-confirm-product {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto;
+            gap: 20px;
+            align-items: center;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 52px;
+        }
+
+        .tk-confirm-product-img {
+            width: 100px; height: 100px;
+            background: #111; display: block;
+        }
+
+        .tk-confirm-product-cat {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: .1em; text-transform: uppercase;
+            color: #666; margin: 0 0 4px;
+        }
+
+        .tk-confirm-product-brand {
+            font-size: 28px; font-weight: 800;
+            text-transform: lowercase;
+            color: #000; margin: 0;
+        }
+
+        .tk-confirm-qty-badge {
+            display: inline-flex;
+            align-items: center; gap: 8px;
+            border: 1px solid #000;
+            padding: 5px 12px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: .08em; text-transform: uppercase;
+        }
+
+        .tk-confirm-product-price {
+            font-size: 22px; font-weight: 700;
+            color: #000; margin: 0;
+        }
+
+        .tk-final-banner {
+            background: var(--red); color: white;
+            padding: 32px 40px;
+            display: flex; gap: 24px;
+            align-items: flex-start;
+        }
+        .tk-final-banner svg { flex-shrink: 0; margin-top: 4px; }
+
+        .tk-final-banner-title {
+            font-size: 20px; font-weight: 800;
+            letter-spacing: .04em; text-transform: uppercase;
+            margin: 0 0 8px; color: white;
+        }
+
+        .tk-final-banner-desc {
+            font-size: 13px; font-weight: 400;
+            color: rgba(255,255,255,0.85);
+            margin: 0; line-height: 1.6;
+        }
+
+        /* ── Footer ── */
+        .site-footer--shop {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 40px; border-top: 1px solid var(--border);
+        }
+        .footer-nav--shop { justify-content: flex-start; gap: 32px; }
+        .footer-logo-img { height: 44px; object-fit: contain; display: block; }
+
+        @media (max-width: 768px) {
+            .tk-wrap { padding: 24px 20px 60px; }
+            .tk-cart-row { grid-template-columns: 1fr; gap: 32px; }
+            .tk-form-grid-2 { grid-template-columns: 1fr; }
+            .tk-pay-layout { grid-template-columns: 1fr; gap: 32px; }
+            .tk-shipping-box { width: 100%; }
+            .tk-confirm-grid { grid-template-columns: 1fr; }
+            .tk-confirm-product { grid-template-columns: 80px 1fr; gap: 12px; }
+            .tk-confirm-qty-badge, .tk-confirm-product-price { grid-column: 2; }
+            .tk-step-label { display: none; }
+            .tk-confirm-title { font-size: 32px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div data-mit-toggle-here></div>
+    <div class="logo-wrap">
+        <img src="logotipo-08.jpg" alt="Mititilla" class="logo" />
+    </div>
+    <nav class="header-icons" aria-label="Accesos rápidos">
+        <button class="icon-btn" data-target="search" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
+        </button>
+        <button class="icon-btn" data-target="cart" aria-label="Cesta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
+        </button>
+        <button class="icon-btn" data-target="profile" aria-label="Perfil">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
+        </button>
+        <button class="icon-btn" data-target="community" aria-label="Comunidad">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
+        </button>
+    </nav>
+</header>
+
+<main>
+    <div class="tk-wrap">
+
+        <p class="tk-eyebrow"><span class="tk-eyebrow-muted">TIENDA</span> <span class="tk-eyebrow-dot">•</span> CESTA</p>
+
+        <!-- ── Stepper ── -->
+        <div class="tk-stepper">
+            <div class="tk-step-item">
+                <div class="tk-step-num is-active" id="sn1">1</div>
+                <span class="tk-step-label">CESTA</span>
+            </div>
+            <div class="tk-step-line"></div>
+            <div class="tk-step-item">
+                <div class="tk-step-num" id="sn2">2</div>
+                <span class="tk-step-label">DATOS</span>
+            </div>
+            <div class="tk-step-line"></div>
+            <div class="tk-step-item">
+                <div class="tk-step-num" id="sn3">3</div>
+                <span class="tk-step-label">PAGO</span>
+            </div>
+            <div class="tk-step-line"></div>
+            <div class="tk-step-item">
+                <div class="tk-step-num" id="sn4">4</div>
+                <span class="tk-step-label">CONFIRMACIÓN</span>
+            </div>
+        </div>
+
+        <!-- ══ PASO 1: CESTA ══ -->
+        <div id="tk-step-1" class="tk-step-content">
+
+            <p class="tk-section-title">TU CESTA <span>•</span> 1 ARTÍCULO</p>
+            <hr class="tk-section-line">
+
+            <div class="tk-cart-row">
+                <div class="tk-cart-img">
+                    <div class="tk-cart-img-placeholder"></div>
+                    <!-- Cuando tengas la foto del producto: <img src="producto.jpg" alt="Guía Mititilla"> -->
+                </div>
+                <div class="tk-cart-info">
+                    <div class="tk-cart-header">
+                        <p class="tk-cart-category">GUÍA GASTRONÓMICA<br>FORMATO FÍSICO</p>
+                        <div class="tk-points-badge">
+                            <span class="tk-points-badge-num">+25</span>
+                            <span class="tk-points-badge-label">puntos</span>
+                        </div>
+                    </div>
+                    <h2 class="tk-cart-brand">mititilla</h2>
+                    <p class="tk-cart-desc">Mapa ilustrado y desplegable. Top 3 dentro de 7 categorías: café, tapas, copas y mucho más.</p>
+                    <p class="tk-cart-desc">Con esta compra ganarás 25 puntos. ¡Acumula 100 y recibirás un regalo!</p>
+                    <p class="tk-cart-price">24,00€</p>
+                    <div class="tk-cart-controls">
+                        <div class="tk-qty">
+                            <button class="tk-qty-btn" onclick="changeQty(-1)">—</button>
+                            <span class="tk-qty-num" id="tkQty">1</span>
+                            <button class="tk-qty-btn" onclick="changeQty(1)">+</button>
+                        </div>
+                        <button class="tk-eliminar-btn" onclick="tkToast('Artículo eliminado de la cesta')">ELIMINAR</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tk-cart-footer">
+                <button class="tk-btn-primary" onclick="showStep(2)">CONTINUAR → DATOS DE ENVÍO</button>
+            </div>
+
+        </div>
+
+        <!-- ══ PASO 2: DATOS ══ -->
+        <div id="tk-step-2" class="tk-step-content hidden">
+
+            <div class="tk-form-section">
+                <p class="tk-section-title">DATOS DE ENVÍO <span>•</span> DESTINATARIO</p>
+                <hr class="tk-section-line">
+
+                <div class="tk-form-grid-2">
+                    <div class="tk-form-group">
+                        <label class="tk-form-label" for="fNombre">NOMBRE <span>*</span></label>
+                        <input class="tk-form-input" type="text" id="fNombre" autocomplete="given-name">
+                    </div>
+                    <div class="tk-form-group">
+                        <label class="tk-form-label" for="fApellidos">APELLIDOS <span>*</span></label>
+                        <input class="tk-form-input" type="text" id="fApellidos" autocomplete="family-name">
+                    </div>
+                </div>
+
+                <div class="tk-form-group">
+                    <label class="tk-form-label" for="fEmail">EMAIL (SERÁ TU USUARIO PARA ACCEDER A LA COMUNIDAD) <span>*</span></label>
+                    <input class="tk-form-input" type="email" id="fEmail" autocomplete="email">
+                </div>
+
+                <div class="tk-form-group" style="max-width: 320px;">
+                    <label class="tk-form-label" for="fTelefono">TELÉFONO (OPCIONAL)</label>
+                    <input class="tk-form-input" type="tel" id="fTelefono" autocomplete="tel">
+                </div>
+            </div>
+
+            <div class="tk-form-section">
+                <p class="tk-section-title">DIRECCIÓN <span>•</span> ENVÍO</p>
+                <hr class="tk-section-line">
+
+                <div class="tk-form-group">
+                    <label class="tk-form-label" for="fCalle">CALLE Y NÚMERO <span>*</span></label>
+                    <input class="tk-form-input" type="text" id="fCalle" autocomplete="street-address">
+                </div>
+
+                <div class="tk-form-grid-2">
+                    <div class="tk-form-group">
+                        <label class="tk-form-label" for="fCiudad">CIUDAD <span>*</span></label>
+                        <input class="tk-form-input" type="text" id="fCiudad" autocomplete="address-level2">
+                    </div>
+                    <div class="tk-form-group">
+                        <label class="tk-form-label" for="fCP">CÓDIGO POSTAL <span>*</span></label>
+                        <input class="tk-form-input" type="text" id="fCP" autocomplete="postal-code">
+                    </div>
+                </div>
+
+                <div class="tk-form-group">
+                    <label class="tk-form-label" for="fPais">PAÍS <span>*</span></label>
+                    <input class="tk-form-input" type="text" id="fPais" autocomplete="country-name">
+                </div>
+
+                <div class="tk-form-check">
+                    <input type="checkbox" id="fPrivacidad">
+                    <label for="fPrivacidad">Acepto la <a href="legal.html#privacidad">política de privacidad</a> y el tratamiento de mis datos para gestionar el pedido y el acceso a la comunidad</label>
+                </div>
+
+                <hr class="tk-section-line" style="margin-top: 0;">
+
+                <div class="tk-form-footer">
+                    <button class="tk-btn-outline" onclick="showStep(1)">← VOLVER A LA CESTA</button>
+                    <button class="tk-btn-primary" onclick="validarYContinuar()">CONTINUAR AL PAGO →</button>
+                </div>
+            </div>
+
+            <div class="tk-promo-banner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/></svg>
+                AL COMPLETAR LA COMPRA GANARÁS 25 PUNTOS – ÚNETE A LA COMUNIDAD MITITILLA
+            </div>
+
+        </div>
+
+        <!-- ══ PASO 3: PAGO ══ -->
+        <div id="tk-step-3" class="tk-step-content hidden">
+
+            <div class="tk-pay-product">
+                <div class="tk-pay-img-placeholder"></div>
+                <div>
+                    <p class="tk-pay-product-category">GUÍA GASTRONÓMICA<br>FORMATO FÍSICO</p>
+                    <h2 class="tk-pay-product-brand">mititilla</h2>
+                    <div class="tk-pay-qty-badge">
+                        <span id="payQty">1</span> GUÍA(S)
+                    </div>
+                </div>
+            </div>
+
+            <div class="tk-pay-layout">
+                <div>
+                    <div class="tk-price-row">
+                        <span class="tk-price-label">SUBTOTAL</span>
+                        <span>24,00 €</span>
+                    </div>
+                    <div class="tk-price-row">
+                        <span class="tk-price-label">ENVÍO</span>
+                        <span>0,00 €</span>
+                    </div>
+                    <div class="tk-price-row">
+                        <span class="tk-price-label">IVA (21%)</span>
+                        <span>5,04 €</span>
+                    </div>
+                    <div class="tk-price-row tk-price-row--total">
+                        <span class="tk-price-label">TOTAL</span>
+                        <span class="tk-price-amount">29,04€</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="tk-shipping-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/><path d="M5 17h-2v-11a1 1 0 0 1 1 -1h9v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5"/></svg>
+                        <p>Envío gratuito a toda España. Estimación aproximada de entrega: 5 – 8 días laborales desde la confirmación y pago del pedido.</p>
+                    </div>
+                    <button class="tk-btn-outline" onclick="finalizarCompra()">FINALIZAR COMPRA 29,04€</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ══ PASO 4: CONFIRMACIÓN ══ -->
+        <div id="tk-step-4" class="tk-step-content hidden">
+
+            <div class="tk-confirm-hero">
+                <div class="tk-confirm-hero-top">
+                    <div class="tk-check-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5l10 -10"/></svg>
+                    </div>
+                    <h2 class="tk-confirm-title">pedido confirmado</h2>
+                </div>
+                <p class="tk-confirm-sub">Gracias por tu compra. Recibirás un email con los detalles y el seguimiento del envío.</p>
+                <p class="tk-confirm-ref">REFERENCIA: <span id="cfRef">#MIT - 2026 - 00847</span></p>
+            </div>
+
+            <p class="tk-section-title">DETALLE <span>•</span> ENVÍO</p>
+            <hr class="tk-section-line">
+
+            <div class="tk-confirm-grid">
+                <div class="tk-confirm-card">
+                    <p class="tk-confirm-label">DESTINATARIO</p>
+                    <p class="tk-confirm-value" id="cfNombre">—</p>
+                </div>
+                <div class="tk-confirm-card">
+                    <p class="tk-confirm-label">EMAIL</p>
+                    <p class="tk-confirm-value" id="cfEmail">—</p>
+                </div>
+                <div class="tk-confirm-card">
+                    <p class="tk-confirm-label">DIRECCIÓN</p>
+                    <p class="tk-confirm-value" id="cfDireccion" style="white-space: pre-line;">—</p>
+                </div>
+                <div class="tk-confirm-card">
+                    <p class="tk-confirm-label">FECHA DEL PEDIDO</p>
+                    <p class="tk-confirm-value" id="cfFecha">—</p>
+                </div>
+                <div class="tk-confirm-card">
+                    <p class="tk-confirm-label">PAGO</p>
+                    <p class="tk-confirm-value">Tarjeta **** 4242</p>
+                </div>
+                <div class="tk-confirm-card">
+                    <p class="tk-confirm-label">ESTADO</p>
+                    <p class="tk-confirm-value tk-confirm-value--red">EN PREPARACIÓN</p>
+                </div>
+            </div>
+
+            <p class="tk-section-title">PEDIDO <span>•</span> PRODUCTO(S)</p>
+            <hr class="tk-section-line">
+
+            <div class="tk-confirm-product">
+                <div class="tk-confirm-product-img"></div>
+                <div>
+                    <p class="tk-confirm-product-cat">GUÍA GASTRONÓMICA • FORMATO FÍSICO</p>
+                    <h3 class="tk-confirm-product-brand">mititilla</h3>
+                </div>
+                <div class="tk-confirm-qty-badge">
+                    <span id="cfQty">1</span> GUÍA(S)
+                </div>
+                <p class="tk-confirm-product-price">29,04€</p>
+            </div>
+
+            <div class="tk-final-banner">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/></svg>
+                <div>
+                    <p class="tk-final-banner-title">+25 PUNTOS ACUMULADOS</p>
+                    <p class="tk-final-banner-desc">Accede a la comunidad y sigue ganando puntos con tus publicaciones. Con 100 puntos recibirás un regalo físico en tu dirección.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div><!-- /tk-wrap -->
+</main>
+
+<footer class="site-footer site-footer--shop">
+    <nav class="footer-nav footer-nav--shop">
+        <a href="legal.html">AVISO LEGAL</a>
+        <a href="legal.html#privacidad">PRIVACIDAD</a>
+        <a href="legal.html#cookies">COOKIES</a>
+    </nav>
+    <img src="logotipo-08.jpg" alt="Mititilla" class="footer-logo-img">
+</footer>
+
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script src="script.js" defer></script>
+
+<script>
+    // Leer cantidad del carrito al cargar
+    try {
+        const saved = localStorage.getItem('mitCart');
+        if (saved) {
+            const q = JSON.parse(saved).qty || 1;
+            document.getElementById('tkQty').textContent = q;
+            document.getElementById('payQty').textContent = q;
+        }
+    } catch(e) {}
+    function showStep(n) {
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById('tk-step-' + i).classList.toggle('hidden', i !== n);
+        }
+        ['sn1','sn2','sn3','sn4'].forEach((id, idx) => {
+            const el = document.getElementById(id);
+            el.classList.remove('is-active','is-done');
+            if (idx + 1 === n)      el.classList.add('is-active');
+            else if (idx + 1 < n)   el.classList.add('is-done');
+        });
+        window.scrollTo(0, 0);
+    }
+
+    function changeQty(delta) {
+        const el = document.getElementById('tkQty');
+        let q = Math.min(10, Math.max(1, parseInt(el.textContent) + delta));
+        el.textContent = q;
+        document.getElementById('payQty').textContent = q;
+    }
+
+    function validarYContinuar() {
+        const campos = ['fNombre','fApellidos','fEmail','fCalle','fCiudad','fCP','fPais'];
+        for (const id of campos) {
+            if (!document.getElementById(id).value.trim()) {
+                tkToast('Completa todos los campos obligatorios.');
+                return;
+            }
+        }
+        if (!document.getElementById('fPrivacidad').checked) {
+            tkToast('Debes aceptar la política de privacidad.');
+            return;
+        }
+        showStep(3);
+    }
+
+    function finalizarCompra() {
+        const nombre    = document.getElementById('fNombre').value.trim();
+        const apellidos = document.getElementById('fApellidos').value.trim();
+        const email     = document.getElementById('fEmail').value.trim();
+        const calle     = document.getElementById('fCalle').value.trim();
+        const ciudad    = document.getElementById('fCiudad').value.trim();
+        const cp        = document.getElementById('fCP').value.trim();
+        const pais      = document.getElementById('fPais').value.trim();
+        const qty       = document.getElementById('tkQty').textContent;
+
+        document.getElementById('cfNombre').textContent    = nombre + ' ' + apellidos;
+        document.getElementById('cfEmail').textContent     = email;
+        document.getElementById('cfDireccion').textContent = calle + '\n' + cp + ' ' + ciudad + ', ' + pais;
+        document.getElementById('cfQty').textContent       = qty;
+
+        const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+        const hoy   = new Date();
+        document.getElementById('cfFecha').textContent = hoy.getDate() + ' de ' + meses[hoy.getMonth()] + ' ' + hoy.getFullYear();
+
+        document.getElementById('cfRef').textContent = '#MIT - ' + hoy.getFullYear() + ' - ' + String(Math.floor(10000 + Math.random() * 90000));
+
+        showStep(4);
+    }
+
+    function tkToast(msg) {
+        const t = document.getElementById('toast');
+        if (!t) return;
+        t.textContent = msg;
+        t.classList.remove('hidden');
+        setTimeout(() => t.classList.add('hidden'), 2500);
+    }
+</script>
+
+</body>
+</html>

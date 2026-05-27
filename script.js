@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     iconBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const target = btn.dataset.target;
-            if (target === 'search')  { if (window.mitOpenSearch) window.mitOpenSearch(); return; }
-            if (target === 'profile')    { window.location.href = 'perfil.html'; return; }
-            if (target === 'community')  { window.location.href = 'comunidad.html'; return; }
-            if (target === 'about')      { window.location.href = 'sobre-nosotros.html'; return; }
-            if (target === 'cart')       { showToast('Cesta — próximamente'); return; }
+            if (target === 'search')    { if (window.mitOpenSearch) window.mitOpenSearch(); return; }
+            if (target === 'cart')      { if (window.mitOpenCart)   window.mitOpenCart();   return; }
+            if (target === 'profile')   { window.location.href = 'perfil.html';        return; }
+            if (target === 'community') { window.location.href = 'comunidad.html';     return; }
+            if (target === 'about')     { window.location.href = 'sobrenosotros.html'; return; }
             const el = document.getElementById(target);
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function makeTileSVG(variant, idx) {
         const g   = '#5BAF96';
         const w   = 'white';
-        const row = Math.floor(idx / 10);
         const col = idx % 10;
         const v   = TILE_VARIANTS[col] || TILE_VARIANTS[0];
+        const row = Math.floor(idx / 10);
 
         const bg          = (row === 0) ? v.outerFill : (v.outerFill === g ? w : g);
         const star        = bg === g ? w : g;
@@ -105,14 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
             { label: 'Inicio',         href: 'index.html'         },
             { label: 'Tienda',         href: 'tienda.html'         },
             { label: 'Comunidad',      href: 'comunidad.html'      },
-            { label: 'Sobre nosotros', href: 'sobre-nosotros.html' },
+            { label: 'Sobre nosotros', href: 'sobrenosotros.html'  },
         ];
 
         const subLinks = [
             { label: 'Inicio',    href: 'index.html'         },
             { label: 'Tienda',    href: 'tienda.html'         },
             { label: 'Comunidad', href: 'comunidad.html'      },
-            { label: 'About us',  href: 'sobre-nosotros.html' },
+            { label: 'About us',  href: 'sobrenosotros.html'  },
         ];
 
         let tilesHtml = '';
@@ -253,10 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     const PAGES = [
-        { label: 'Inicio',         desc: 'Página principal — guía gastronómica de Granada',  href: 'index.html'         },
-        { label: 'Tienda',         desc: 'Compra la guía ilustrada y desplegable de Granada', href: 'tienda.html'         },
-        { label: 'Comunidad',      desc: 'Comparte tu Granada y acumula puntos',              href: 'comunidad.html'      },
-        { label: 'Sobre nosotros', desc: 'Conoce el equipo detrás de Mititilla',              href: 'sobre-nosotros.html' },
+        { label: 'Inicio',         desc: 'Página principal — guía gastronómica de Granada',  href: 'index.html'        },
+        { label: 'Tienda',         desc: 'Compra la guía ilustrada y desplegable de Granada', href: 'tienda.html'        },
+        { label: 'Comunidad',      desc: 'Comparte tu Granada y acumula puntos',              href: 'comunidad.html'     },
+        { label: 'Sobre nosotros', desc: 'Conoce el equipo detrás de Mititilla',              href: 'sobrenosotros.html' },
     ];
 
     function buildOverlay() {
@@ -395,6 +395,310 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeSearch();
         });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', inject);
+    } else {
+        inject();
+    }
+
+})();
+
+
+/**
+ * MITITILLA — Carrito desplegable
+ */
+(function () {
+    'use strict';
+
+    let cartQty = 0;
+
+    try {
+        const saved = localStorage.getItem('mitCart');
+        if (saved) cartQty = JSON.parse(saved).qty || 0;
+    } catch(e) {}
+
+    function saveCart() {
+        try { localStorage.setItem('mitCart', JSON.stringify({ qty: cartQty })); } catch(e) {}
+    }
+
+    function buildCartPanel() {
+        return `
+<div class="mit-cart-overlay" id="mitCartOverlay"></div>
+<div class="mit-cart-panel" id="mitCartPanel">
+
+  <div class="mit-cart-head">
+    <p class="mit-cart-title">TU CESTA</p>
+    <button class="mit-cart-close" id="mitCartClose">&#x2715;</button>
+  </div>
+
+  <div class="mit-cart-empty" id="mitCartEmpty">
+    <p>Tu cesta está vacía.</p>
+    <a href="tienda.html">Ver la tienda →</a>
+  </div>
+
+  <div class="mit-cart-content" id="mitCartContent">
+    <div class="mit-cart-item-row">
+      <div class="mit-cart-item-img"></div>
+      <div class="mit-cart-item-info">
+        <p class="mit-cart-item-cat">GUÍA GASTRONÓMICA<br>FORMATO FÍSICO</p>
+        <p class="mit-cart-item-name">mititilla</p>
+        <p class="mit-cart-item-price">24,00€</p>
+      </div>
+    </div>
+    <div class="mit-cart-qty-row">
+      <button class="mit-cart-qty-btn" onclick="window.mitCartChangeQty(-1)">—</button>
+      <span id="mitCartQtyNum">1</span>
+      <button class="mit-cart-qty-btn" onclick="window.mitCartChangeQty(1)">+</button>
+    </div>
+  </div>
+
+  <div class="mit-cart-footer" id="mitCartFooter">
+    <div class="mit-cart-subtotal">
+      <span>SUBTOTAL</span>
+      <span id="mitCartSubtotal">24,00€</span>
+    </div>
+    <button class="mit-cart-buy-btn" onclick="window.location.href='cesta.html'">
+      COMPRAR →
+    </button>
+  </div>
+
+</div>`;
+    }
+
+    function updateCartUI() {
+        const empty   = document.getElementById('mitCartEmpty');
+        const content = document.getElementById('mitCartContent');
+        const footer  = document.getElementById('mitCartFooter');
+        const qtyNum  = document.getElementById('mitCartQtyNum');
+        const subtot  = document.getElementById('mitCartSubtotal');
+        const badge   = document.getElementById('mitCartBadge');
+
+        if (cartQty > 0) {
+            if (empty)   empty.style.display   = 'none';
+            if (content) content.style.display = 'flex';
+            if (footer)  footer.style.display  = 'flex';
+            if (qtyNum)  qtyNum.textContent    = cartQty;
+            if (subtot)  subtot.textContent    = (24 * cartQty).toFixed(2).replace('.', ',') + '€';
+            if (badge) { badge.textContent = cartQty; badge.style.display = 'flex'; }
+        } else {
+            if (empty)   empty.style.display   = 'block';
+            if (content) content.style.display = 'none';
+            if (footer)  footer.style.display  = 'none';
+            if (badge)   badge.style.display   = 'none';
+        }
+    }
+
+    function openCart() {
+        const panel   = document.getElementById('mitCartPanel');
+        const overlay = document.getElementById('mitCartOverlay');
+        if (!panel || !overlay) return;
+        panel.classList.add('is-open');
+        overlay.classList.add('is-visible');
+        document.body.style.overflow = 'hidden';
+        updateCartUI();
+    }
+
+    function closeCart() {
+        const panel   = document.getElementById('mitCartPanel');
+        const overlay = document.getElementById('mitCartOverlay');
+        if (!panel || !overlay) return;
+        panel.classList.remove('is-open');
+        overlay.classList.remove('is-visible');
+        document.body.style.overflow = '';
+    }
+
+    window.mitOpenCart = openCart;
+
+    window.mitAddToCart = function () {
+        cartQty = Math.min(10, cartQty + 1);
+        saveCart();
+        openCart();
+    };
+
+    window.mitCartChangeQty = function (delta) {
+        cartQty = Math.max(0, cartQty + delta);
+        saveCart();
+        if (cartQty === 0) closeCart();
+        updateCartUI();
+    };
+
+    function inject() {
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = buildCartPanel();
+        document.body.appendChild(wrapper);
+
+        const style = document.createElement('style');
+        style.textContent = `
+      .mit-cart-overlay {
+        position: fixed; inset: 0; z-index: 1400;
+        background: rgba(0,0,0,0.4);
+        opacity: 0; pointer-events: none;
+        transition: opacity .25s ease;
+      }
+      .mit-cart-overlay.is-visible { opacity: 1; pointer-events: all; }
+
+      .mit-cart-panel {
+        position: fixed; top: 0; right: -420px;
+        width: 400px; height: 100vh;
+        background: #fff;
+        z-index: 1500;
+        box-shadow: -4px 0 32px rgba(0,0,0,0.12);
+        display: flex; flex-direction: column;
+        transition: right .3s ease;
+        box-sizing: border-box;
+      }
+      .mit-cart-panel.is-open { right: 0; }
+
+      .mit-cart-head {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 28px 28px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        flex-shrink: 0;
+      }
+      .mit-cart-title {
+        font-family: 'Inter', sans-serif;
+        font-size: 11px; font-weight: 700;
+        letter-spacing: .14em; text-transform: uppercase;
+        color: #000; margin: 0;
+      }
+      .mit-cart-close {
+        background: none; border: none; cursor: pointer;
+        font-size: 20px; color: #999; padding: 4px; line-height: 1;
+      }
+      .mit-cart-close:hover { color: #000; }
+
+      .mit-cart-empty {
+        flex: 1;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        gap: 12px; padding: 40px;
+        text-align: center;
+      }
+      .mit-cart-empty p {
+        font-family: 'Inter', sans-serif;
+        font-size: 14px; color: #666; margin: 0;
+      }
+      .mit-cart-empty a {
+        font-family: 'Inter', sans-serif;
+        font-size: 12px; font-weight: 600;
+        letter-spacing: .08em; text-transform: uppercase;
+        color: #000; text-decoration: none;
+      }
+      .mit-cart-empty a:hover { opacity: .6; }
+
+      .mit-cart-content {
+        flex: 1;
+        display: none; flex-direction: column;
+        gap: 20px; padding: 28px;
+        overflow-y: auto;
+      }
+
+      .mit-cart-item-row {
+        display: flex; gap: 16px; align-items: flex-start;
+      }
+      .mit-cart-item-img {
+        width: 80px; height: 80px;
+        background: #111; flex-shrink: 0;
+      }
+      .mit-cart-item-info { flex: 1; }
+      .mit-cart-item-cat {
+        font-family: 'Inter', sans-serif;
+        font-size: 9px; font-weight: 600;
+        letter-spacing: .1em; text-transform: uppercase;
+        color: #888; margin: 0 0 4px; line-height: 1.5;
+      }
+      .mit-cart-item-name {
+        font-family: 'Inter', sans-serif;
+        font-size: 24px; font-weight: 800;
+        text-transform: lowercase; letter-spacing: -.01em;
+        color: #000; margin: 0 0 6px;
+      }
+      .mit-cart-item-price {
+        font-family: 'Inter', sans-serif;
+        font-size: 16px; font-weight: 700;
+        color: #000; margin: 0;
+      }
+
+      .mit-cart-qty-row {
+        display: flex; align-items: center;
+        border: 1px solid #000; width: fit-content;
+      }
+      .mit-cart-qty-btn {
+        width: 36px; height: 36px;
+        background: none; border: none;
+        font-size: 16px; cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .mit-cart-qty-btn:hover { background: #f0f0f0; }
+      #mitCartQtyNum {
+        width: 36px; text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-size: 14px; font-weight: 600;
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
+        height: 36px; line-height: 36px;
+      }
+
+      .mit-cart-footer {
+        display: none; flex-direction: column;
+        gap: 16px; padding: 20px 28px 28px;
+        border-top: 1px solid #e0e0e0;
+        flex-shrink: 0;
+      }
+      .mit-cart-subtotal {
+        display: flex; justify-content: space-between;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px; font-weight: 700;
+        letter-spacing: .08em; text-transform: uppercase;
+        color: #000;
+      }
+      .mit-cart-buy-btn {
+        width: 100%;
+        background: #000; color: white;
+        border: none; padding: 18px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px; font-weight: 700;
+        letter-spacing: .12em; text-transform: uppercase;
+        cursor: pointer;
+      }
+      .mit-cart-buy-btn:hover { background: #222; }
+
+      #mitCartBadge {
+        position: absolute; top: -4px; right: -4px;
+        background: #c64439; color: white;
+        width: 16px; height: 16px;
+        border-radius: 50%;
+        font-size: 9px; font-weight: 700;
+        display: none; align-items: center; justify-content: center;
+        font-family: 'Inter', sans-serif;
+        pointer-events: none;
+      }
+    `;
+        document.head.appendChild(style);
+
+        // Badge en el icono del carrito
+        const cartBtn = document.querySelector('[data-target="cart"]');
+        if (cartBtn) {
+            cartBtn.style.position = 'relative';
+            const badge = document.createElement('span');
+            badge.id = 'mitCartBadge';
+            cartBtn.appendChild(badge);
+        }
+
+        const closeBtn = document.getElementById('mitCartClose');
+        const overlay  = document.getElementById('mitCartOverlay');
+        if (closeBtn) closeBtn.addEventListener('click', closeCart);
+        if (overlay)  overlay.addEventListener('click', closeCart);
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeCart();
+        });
+
+        // Restaurar badge si había items guardados
+        updateCartUI();
     }
 
     if (document.readyState === 'loading') {
