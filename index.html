@@ -61,6 +61,25 @@
             font-weight: 600;
             letter-spacing: .08em;
             cursor: pointer;
+            @media (max-width: 600px) {
+                #cookieBanner {
+                    flex-direction: column;
+                    padding: 20px 16px;
+                    gap: 14px;
+                    text-align: center;
+                }
+
+                .cookie-btns {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .cookie-btn-reject,
+                .cookie-btn-accept {
+                    flex: 1;
+                    text-align: center;
+                }
+            }
         }
     </style>
 </head>
