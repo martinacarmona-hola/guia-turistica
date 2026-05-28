@@ -6,6 +6,41 @@
     <title>Tienda — Mititilla</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Slider ── */
+        .tk-slider { position: relative; overflow: hidden; border-radius: 12px; width: 100%; }
+        .tk-slider-track {
+            display: flex;
+            transition: transform .5s ease;
+        }
+        .tk-slider-track img {
+            width: 100%;
+            min-width: 100%;
+            height: 760px;
+            display: block;
+            flex-shrink: 0;
+        }
+        .tk-slider-dots {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .tk-slider-dots button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255,255,255,.5);
+            cursor: pointer;
+            padding: 0;
+            transition: background .2s;
+        }
+        .tk-slider-dots button.active { background: #fff; }
+    </style>
 </head>
 <body>
 
@@ -47,23 +82,18 @@
     <section class="product-section">
 
         <!-- Galería / slideshow -->
-        <div class="product-gallery">
-            <div class="slideshow" id="slideshow">
-                <!-- Reemplaza los src con tus fotos del producto -->
-                <div class="slide active">
-                    <img src="IMAGEN HOME.jpg" alt="Mititilla guía gastronómica" />
-                </div>
-                <div class="slide">
-                    <img src="IMAGEN HOME.jpg" alt="Mititilla guía gastronómica detalle" />
-                </div>
-                <div class="slide">
-                    <img src="IMAGEN HOME.jpg" alt="Mititilla guía gastronómica interior" />
-                </div>
+        <div class="tk-slider">
+            <div class="tk-slider-track">
+                <img src="01.jpg" alt="Mititilla">
+                <img src="02.jpg" alt="Mititilla">
+                <img src="03.jpg" alt="Mititilla">
+                <img src="04.jpg" alt="Mititilla">
             </div>
-            <div class="slide-dots" id="slideDots">
-                <button class="slide-dot active" data-slide="0" aria-label="Foto 1"></button>
-                <button class="slide-dot" data-slide="1" aria-label="Foto 2"></button>
-                <button class="slide-dot" data-slide="2" aria-label="Foto 3"></button>
+            <div class="tk-slider-dots">
+                <button aria-label="Foto 1"></button>
+                <button aria-label="Foto 2"></button>
+                <button aria-label="Foto 3"></button>
+                <button aria-label="Foto 4"></button>
             </div>
         </div>
 
@@ -86,7 +116,7 @@
                 <button class="qty-btn" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
             </div>
 
-            <button class="cta-btn" onclick="window.mitAddToCart()">AÑADIR A LA CESTA →</button>
+            <button class="cta-btn" id="addToCartBtn">AÑADIR A LA CESTA →</button>
         </div>
 
     </section>
@@ -155,33 +185,25 @@
 <script src="script.js" defer></script>
 
 <script>
-    /* ── Slideshow ── */
-    const slides   = document.querySelectorAll('.slide');
-    const dots     = document.querySelectorAll('.slide-dot');
-    let current    = 0;
-    let timer;
+    /* ── Slider ── */
+    (function () {
+        const track = document.querySelector('.tk-slider-track');
+        const dots  = document.querySelectorAll('.tk-slider-dots button');
+        if (!track) return;
 
-    function goTo(n) {
-        slides[current].classList.remove('active');
-        dots[current].classList.remove('active');
-        current = (n + slides.length) % slides.length;
-        slides[current].classList.add('active');
-        dots[current].classList.add('active');
-    }
+        const total = track.children.length;
+        let current = 0;
 
-    function startTimer() {
-        timer = setInterval(() => goTo(current + 1), 4000);
-    }
+        function goToSlide(n) {
+            current = (n + total) % total;
+            track.style.transform = `translateX(-${current * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        }
 
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            clearInterval(timer);
-            goTo(parseInt(dot.dataset.slide));
-            startTimer();
-        });
-    });
-
-    startTimer();
+        dots.forEach((d, i) => d.addEventListener('click', () => goToSlide(i)));
+        goToSlide(0);
+        setInterval(() => goToSlide(current + 1), 2000);
+    })();
 
     /* ── Cantidad ── */
     const qtyMinus = document.getElementById('qtyMinus');
@@ -206,14 +228,14 @@
     }
 
     /* ── Cesta ── */
-    const cartModal       = document.getElementById('cartModal');
-    const cartStep1       = document.getElementById('cartStep1');
-    const cartStep2       = document.getElementById('cartStep2');
-    const cartBadge       = document.getElementById('cartBadge');
-    const cartQtyDisplay  = document.getElementById('cartQtyDisplay');
-    const cartTotalDisplay= document.getElementById('cartTotalDisplay');
-    const orderRef        = document.getElementById('orderRef');
-    const PRICE           = 24;
+    const cartModal        = document.getElementById('cartModal');
+    const cartStep1        = document.getElementById('cartStep1');
+    const cartStep2        = document.getElementById('cartStep2');
+    const cartBadge        = document.getElementById('cartBadge');
+    const cartQtyDisplay   = document.getElementById('cartQtyDisplay');
+    const cartTotalDisplay = document.getElementById('cartTotalDisplay');
+    const orderRef         = document.getElementById('orderRef');
+    const PRICE            = 24;
 
     function openCart() {
         cartModal.classList.remove('hidden');
@@ -229,12 +251,12 @@
         cartStep2.classList.add('hidden');
     }
 
-    document.getElementById('addToCart').addEventListener('click', () => {
+    document.getElementById('addToCartBtn').addEventListener('click', () => {
         if (qty === 0) {
             showToast('Selecciona al menos 1 unidad');
             return;
         }
-        cartQtyDisplay.textContent  = qty;
+        cartQtyDisplay.textContent   = qty;
         cartTotalDisplay.textContent = (qty * PRICE).toFixed(2).replace('.', ',') + '€';
         cartBadge.textContent = qty;
         cartBadge.classList.remove('hidden');
@@ -272,7 +294,6 @@
         if (e.key === 'Escape' && !cartModal.classList.contains('hidden')) closeCart();
     });
 </script>
-<script src="script.js" defer></script>
-</body>
 
+</body>
 </html>

@@ -115,10 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { label: 'About us',  href: 'sobrenosotros.html'  },
         ];
 
-        let tilesHtml = '';
-        for (let i = 0; i < 20; i++) {
-            tilesHtml += `<div class="mit-tile-cell">${makeTileSVG(TILE_VARIANTS[i % 10], i)}</div>`;
-        }
 
         const navHtml = navItems.map(item => {
             const isActive = window.location.href.includes(item.href);
@@ -150,9 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ${navHtml}
   </ul>
 
-  <div class="mit-panel-deco" aria-hidden="true">
-    ${tilesHtml}
-  </div>
 </nav>`;
     }
 
@@ -169,16 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(panelWrapper);
 
         const extraStyle = document.createElement('style');
-        extraStyle.textContent = `
-      .mit-panel-deco {
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        flex-shrink: 0;
-      }
-      .mit-tile-cell { aspect-ratio: 1; overflow: hidden; }
-      .mit-tile-cell svg { width: 100%; height: 100%; display: block; }
-    `;
         document.head.appendChild(extraStyle);
 
         const placeholder = document.querySelector('[data-mit-toggle-here]');

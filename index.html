@@ -6,10 +6,65 @@
     <title>Mititilla — Granada en papel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ── Banner cookies ── */
+        #cookieBanner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            color: #111;
+            border-top: 1px solid #e5e5e5;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            z-index: 9999;
+            font-family: 'Inter', sans-serif;
+        }
+        #cookieBanner p {
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 0;
+            flex: 1;
+        }
+        #cookieBanner a {
+            color: #c64439;
+            text-decoration: underline;
+        }
+        .cookie-btns {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .cookie-btn-reject {
+            padding: 10px 22px;
+            border: 1px solid #111;
+            background: transparent;
+            color: #111;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            cursor: pointer;
+        }
+        .cookie-btn-accept {
+            padding: 10px 22px;
+            border: none;
+            background: #c64439;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .08em;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <header class="site-header">
-    <!-- Placeholder: el script inyecta aquí el botón hamburguesa correcto -->
     <div data-mit-toggle-here></div>
 
     <div class="logo-wrap">
@@ -17,22 +72,18 @@
     </div>
 
     <nav class="header-icons" aria-label="Accesos rápidos">
-        <!-- search -->
         <button class="icon-btn" data-target="search" aria-label="Buscar">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/><path d="M21 21l-6 -6"/></svg>
         </button>
 
-        <!-- shopping-bag -->
         <button class="icon-btn" data-target="cart" aria-label="Cesta">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"/><path d="M9 11v-5a3 3 0 0 1 6 0v5"/></svg>
         </button>
 
-        <!-- user -->
         <button class="icon-btn" data-target="profile" aria-label="Perfil">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/></svg>
         </button>
 
-        <!-- layout-grid / comunidad -->
         <button class="icon-btn" data-target="community" aria-label="Comunidad">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"/></svg>
         </button>
@@ -42,7 +93,7 @@
 <main>
     <section class="hero">
         <div class="hero-left">
-            <img src="IMAGEN HOME.jpg" class="hero-img" />
+            <img src="mockup 2.jpg" class="hero-img" />
             <div class="hero-visual" role="img" aria-label="Imagen principal"></div>
         </div>
 
@@ -59,12 +110,10 @@
         </div>
     </section>
 
-    <!-- Fila decorativa de iconos verdes -->
     <div class="icon-row">
         <img src="web mititilla-16.jpg" class="ICON" />
     </div>
 
-    <!-- Sección roja: Comunidad Exclusiva -->
     <section class="exclusive-section">
         <div class="exclusive-left">
             <p class="exclusive-eyebrow">COMUNIDAD EXCLUSIVA • COMPRADORES</p>
@@ -83,7 +132,6 @@
     </section>
 </main>
 
-<!-- Footer -->
 <footer class="site-footer">
     <nav class="footer-nav">
         <a href="legal.html">AVISO LEGAL</a>
@@ -92,9 +140,36 @@
     </nav>
 </footer>
 
-<!-- Toast -->
 <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
+<!-- Banner cookies -->
+<div id="cookieBanner">
+    <p>Usamos cookies propias para mejorar tu experiencia de navegación. Puedes aceptarlas o rechazarlas.
+        <a href="legal.html#cookies">Más información</a></p>
+    <div class="cookie-btns">
+        <button class="cookie-btn-reject" id="cookieReject">RECHAZAR</button>
+        <button class="cookie-btn-accept" id="cookieAccept">ACEPTAR</button>
+    </div>
+</div>
+
 <script src="script.js" defer></script>
+<script>
+    /* ── Cookies banner ── */
+    (function () {
+        const banner = document.getElementById('cookieBanner');
+        if (sessionStorage.getItem('cookieChoice')) {
+            banner.style.display = 'none';
+            return;
+        }
+        document.getElementById('cookieAccept').addEventListener('click', function () {
+            sessionStorage.setItem('cookieChoice', 'accepted');
+            banner.style.display = 'none';
+        });
+        document.getElementById('cookieReject').addEventListener('click', function () {
+            sessionStorage.setItem('cookieChoice', 'rejected');
+            banner.style.display = 'none';
+        });
+    })();
+</script>
 </body>
 </html>
