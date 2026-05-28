@@ -9,25 +9,30 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         /* ── Slider ── */
-        .tk-slider { position: relative; overflow: hidden; border-radius: 12px; width: 100%; }
+        .tk-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            width: 100%;
+            min-width: 0;
+        }
         .tk-slider-track {
             display: flex;
             transition: transform .5s ease;
-            .tk-slider-track img {
-                width: 100%;
-                min-width: 100%;
-                height: 350px;
-                object-fit: cover;
-                display: block;
-                flex-shrink: 0;
-            }
-
-            @media (max-width: 768px) {
-                .tk-slider-track img { height: 260px; }
-            }
-            @media (max-width: 480px) {
-                .tk-slider-track img { height: 200px; }
-            }
+        }
+        .tk-slider-track img {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 800px;
+            object-fit: cover;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .tk-slider-track img { height: 500px; }
+        }
+        @media (max-width: 480px) {
+            .tk-slider-track img { height: 420px; }
+        }
         .tk-slider-dots {
             position: absolute;
             bottom: 14px;
@@ -80,16 +85,13 @@
 </header>
 
 <main>
-    <!-- Breadcrumb -->
     <div class="shop-header">
         <p class="shop-title">TIENDA <span style="color:#c64439;">•</span> CESTA</p>
     </div>
     <hr class="shop-divider" />
 
-    <!-- Producto -->
     <section class="product-section">
 
-        <!-- Galería / slideshow -->
         <div class="tk-slider">
             <div class="tk-slider-track">
                 <img src="01.jpg" alt="Mititilla">
@@ -105,37 +107,29 @@
             </div>
         </div>
 
-        <!-- Info del producto -->
         <div class="product-info">
             <p class="product-category">GUÍA<br>GASTRONÓMICA<br>FORMATO FÍSICO</p>
-
             <h2 class="product-name">MITITILLA</h2>
-
             <div class="product-desc">
                 <p>Mapa ilustrado y desplegable. Top 3 dentro de 7 categorías: café, tapas, copas y mucho más.</p>
                 <p>Mapa delimitado por los mejores locales gastronómicos escogidos por mayor calidad y experiencia en el sector gastronómico.</p>
             </div>
-
             <p class="product-price">24,00€</p>
-
             <div class="product-qty">
                 <button class="qty-btn" id="qtyMinus" aria-label="Reducir cantidad">−</button>
                 <span class="qty-value" id="qtyValue">0</span>
                 <button class="qty-btn" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
             </div>
-
             <button class="cta-btn" id="addToCartBtn">AÑADIR A LA CESTA →</button>
         </div>
 
     </section>
 </main>
 
-<!-- Franja decorativa de azulejos -->
 <div class="icon-row">
     <img src="web mititilla-16.jpg" class="ICON" />
 </div>
 
-<!-- Footer -->
 <footer class="site-footer site-footer--shop">
     <nav class="footer-nav footer-nav--shop">
         <a href="legal.html">AVISO LEGAL</a>
@@ -145,40 +139,33 @@
     <img src="logotipo-08.jpg" alt="Mititilla" class="footer-logo-img" />
 </footer>
 
-<!-- Toast -->
 <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
-<!-- Modal cesta -->
 <div id="cartModal" class="cart-modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="cart-modal-panel">
 
-        <!-- Paso 1: resumen cesta -->
         <div id="cartStep1">
             <div class="cart-modal-head">
                 <p class="cart-modal-title">TIENDA <span style="color:#c64439;">•</span> CESTA</p>
                 <button class="cart-modal-close" id="cartClose" aria-label="Cerrar cesta">✕</button>
             </div>
             <hr class="shop-divider" />
-
             <div class="cart-item">
                 <p class="cart-item-name">MITITILLA</p>
                 <p class="cart-item-sub">Guía Gastronómica · Formato Físico</p>
                 <p class="cart-item-qty">Cantidad: <strong id="cartQtyDisplay">1</strong></p>
                 <p class="cart-item-total">Total: <strong id="cartTotalDisplay">24,00€</strong></p>
             </div>
-
             <button class="confirm-btn" id="confirmOrder">CONFIRMAR PEDIDO →</button>
             <button class="keep-shopping-btn" id="keepShopping">← Seguir comprando</button>
         </div>
 
-        <!-- Paso 2: pedido confirmado -->
         <div id="cartStep2" class="hidden">
             <div class="cart-modal-head">
                 <p class="cart-modal-title">PEDIDO CONFIRMADO</p>
                 <button class="cart-modal-close" id="cartClose2" aria-label="Cerrar">✕</button>
             </div>
             <hr class="shop-divider" />
-
             <div class="order-confirmed">
                 <p class="order-check">✓</p>
                 <p class="order-thanks">Gracias por tu compra.<br>Recibirás un email con los detalles de tu pedido.</p>
