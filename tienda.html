@@ -23,16 +23,28 @@
         .tk-slider-track img {
             flex: 0 0 100%;
             width: 100%;
-            height: 800px;
-            object-fit: cover;
+            height: auto;
+            aspect-ratio: 4 / 5;   /* FORMA del carrusel */
+            object-fit: cover;     /* la foto llena todo el rectángulo */
             display: block;
         }
+
+        /* Escritorio: carrusel más estrecho a la izquierda */
+        @media (min-width: 769px) {
+            .product-section {
+                grid-template-columns: minmax(0, 420px) 1fr;   /* TAMAÑO del carrusel */
+                align-items: start;
+            }
+        }
+
+        /* Móvil: carrusel arriba, centrado */
         @media (max-width: 768px) {
-            .tk-slider-track img { height: 500px; }
+            .tk-slider {
+                max-width: 420px;
+                margin-inline: auto;
+            }
         }
-        @media (max-width: 480px) {
-            .tk-slider-track img { height: 420px; }
-        }
+
         .tk-slider-dots {
             position: absolute;
             bottom: 14px;
@@ -94,12 +106,14 @@
 
         <div class="tk-slider">
             <div class="tk-slider-track">
-                <img src="01.jpg" alt="Mititilla">
-                <img src="02.jpg" alt="Mititilla">
-                <img src="03.jpg" alt="Mititilla">
-                <img src="04.jpg" alt="Mititilla">
+                <!-- ▼▼▼ AQUÍ SE CAMBIAN LAS FOTOS DEL CARRUSEL: una línea por foto ▼▼▼ -->
+                <img src="PORTADA.png" alt="Mititilla">
+                <img src="MAPA.jpg" alt="Mititilla">
+                <img src="CONTRAPORTADA.jpg" alt="Mititilla">
+                <!-- ▲▲▲ FIN DE LAS FOTOS ▲▲▲ -->
             </div>
             <div class="tk-slider-dots">
+                <!-- Un botón por cada foto de arriba -->
                 <button aria-label="Foto 1"></button>
                 <button aria-label="Foto 2"></button>
                 <button aria-label="Foto 3"></button>
@@ -186,7 +200,7 @@
         const dots  = document.querySelectorAll('.tk-slider-dots button');
         if (!track) return;
 
-        const total = track.children.length;
+        const total = track.querySelectorAll('img').length;
         let current = 0;
 
         function goToSlide(n) {
@@ -197,7 +211,7 @@
 
         dots.forEach((d, i) => d.addEventListener('click', () => goToSlide(i)));
         goToSlide(0);
-        setInterval(() => goToSlide(current + 1), 2000);
+        setInterval(() => goToSlide(current + 1), 2000);   /* milisegundos por foto */
     })();
 
     /* ── Cantidad ── */
